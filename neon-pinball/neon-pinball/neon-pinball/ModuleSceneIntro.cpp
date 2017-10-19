@@ -43,6 +43,8 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(background, 0, 0);
+
+
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
