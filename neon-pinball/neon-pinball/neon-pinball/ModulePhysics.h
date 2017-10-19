@@ -50,6 +50,19 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
+	//Mouse 
+	int mouse_x;
+	int mouse_y;
+	b2Vec2 mouse_position;
+
+	void getMousePositionInMeters(int* mouse_x, int* mouse_y);
+
+
+	b2Body *body_found = nullptr;
+
+	bool mouse_cliked = false;
+
+
 private:
 
 	bool debug;

@@ -247,11 +247,36 @@ update_status ModulePhysics::PostUpdate()
 			break;
 			}
 
-			// TODO 1: If mouse button 1 is pressed ...
-			// App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN
-			// test if the current body contains mouse position
+			//To drag things with the mouse
+			if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
+				getMousePositionInMeters(&mouse_x, &mouse_y);
+				if (f->TestPoint(mouse_position)) {
+					body_found = b;
+					mouse_cliked = true;
+				}
+				else
+					mouse_cliked = false;
+			}
 		}
 	}
+
+
+	// If a body was selected we will attach a mouse joint to it
+	// so we can pull it around
+	// TODO 2: If a body was selected, create a mouse joint
+	// using mouse_joint class property
+	if (body_found) {
+		b2MouseJointDef def;
+		def.bodyA = ground;
+		def.bodyB = body_found;
+		def.target = mouse_position;
+		def.dampingRatio = 0.5f;
+		def.frequencyHz = 2.0f;
+		def.maxForce = 100.0f * body_found->GetMass();
+		mouse_joint = (b2MouseJoint*)world->CreateJoint(&def);
+	}
+
+	
 
 	// If a body was selected we will attach a mouse joint to it
 	// so we can pull it around
@@ -351,4 +376,11 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 
 	if (physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
+}
+
+void ModulePhysics::getMousePositionInMeters(int* mouse_x, int* mouse_y)
+{
+	SDL_GetMouseState(mouse_x, mouse_y);
+	mouse_position.x = PIXEL_TO_METERS(*mouse_x);
+	mouse_position.y = PIXEL_TO_METERS(*mouse_y);
 }
