@@ -29,4 +29,7 @@ public:
 
 	p2Point<int> ray;
 	bool ray_on;
+
+	//Bodies
+	PhysBody* ball;
 };

@@ -28,6 +28,8 @@ bool ModuleSceneIntro::Start()
 	background = App->textures->Load("pinball/Pinball.png");
 
 
+
+
 	return ret;
 }
 
@@ -42,6 +44,15 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		ray_on = !ray_on;
+		ray.x = App->input->GetMouseX();
+		ray.y = App->input->GetMouseY();
+	}
+		
+	//ball = App->physics->CreateCircle(490, 800, 15, "static", 0x0004, 0x0001);
+
 	App->renderer->Blit(background, 0, 0);
 	// Prepare for raycast ------------------------------------------------------
 	
