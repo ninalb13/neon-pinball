@@ -16,10 +16,11 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
-
+	void Create_Limits();
 
 public:
-	p2List<PhysBody*> background_;
+	
+	PhysBody* background_;
 
 
 	bool sensed;
