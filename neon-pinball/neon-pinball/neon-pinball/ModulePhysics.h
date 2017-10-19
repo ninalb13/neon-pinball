@@ -42,22 +42,18 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius, const char* type, uint16 category, uint16 mask);
+	PhysBody* CreateCircle(int x, int y, int radius);
+	PhysBody* CreateRectangle(int x, int y, int width, int height);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
-	PhysBody* CreateChain(int x, int y, int* points, int size, const char* type, uint16 category, uint16 mask);
-	b2RevoluteJoint* CreateRevoluteJoint(PhysBody* A, PhysBody* B, float anchor_x, float anchor_y, int reference_Angle, int lower_angle, int upper_angle);
-	PhysBody* CreatePolygon(int x, int y, int* points, int size, float density, uint16 category, uint16 mask);
+	PhysBody* CreateChain(int x, int y, int* points, int size);
 
+	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
-	bool DeleteBody(b2Body* circle);
 
 private:
 
 	bool debug;
 	b2World* world;
-	b2Body* ground;
-
-	// Joints
 	b2MouseJoint* mouse_joint;
-	b2Vec2 mouse_pos;
+	b2Body* ground;
 };
