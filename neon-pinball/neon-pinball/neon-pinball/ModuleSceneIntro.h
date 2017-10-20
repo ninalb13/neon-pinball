@@ -20,7 +20,7 @@ public:
 
 public:
 	
-	PhysBody* background_;
+	p2List<PhysBody*> background_;
 
 
 	bool sensed;

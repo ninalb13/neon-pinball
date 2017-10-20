@@ -27,7 +27,7 @@ bool ModuleSceneIntro::Start()
 
 	background = App->textures->Load("pinball/Pinball.png");
 
-
+	Create_Limits();
 
 
 	return ret;
@@ -66,7 +66,6 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	// All draw functions ------------------------------------------------------
-	//p2List_item<PhysBody*>* c = circles.getFirst();
 
 	
 
@@ -109,25 +108,25 @@ void ModuleSceneIntro::Create_Limits()
 {
 	// Pivot 0, 0
 	int Pinball[36] = {
-		31, 751,
-		28, 232,
-		36, 184,
-		55, 144,
-		83, 108,
-		129, 70,
-		189, 41,
-		266, 30,
-		346, 41,
-		396, 67,
-		426, 89,
-		450, 138,
-		457, 200,
-		461, 765,
-		309, 875,
-		308, 948,
-		181, 948,
-		180, 875
+		31,751,
+		28,232,
+		36,184,
+		55,144,
+		83,108,
+		129,70,
+		189,41,
+		266,30,
+		346,41,
+		396,67,
+		426,89,
+		450,138,
+		457,200,
+		461,765,
+		309,875,
+		308,875,
+		181,948,
+		180,875
 	};
 
-	background_ = App->physics->CreateChain(0, 0, Pinball, 111);
+	background_.add(App->physics->CreateChain(0, 0, Pinball, 36));
 }
