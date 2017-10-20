@@ -128,5 +128,5 @@ void ModuleSceneIntro::Create_Limits()
 		180,875
 	};
 
-	background_.add(App->physics->CreateChain(0, 0, Pinball, 36));
+	background_.add(App->physics->CreateChain(0, 0, Pinball, 36, "static"));
 }
