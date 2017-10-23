@@ -107,26 +107,35 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 void ModuleSceneIntro::Create_Limits()
 {
 	// Pivot 0, 0
-	int Pinball[36] = {
-		31,751,
-		28,232,
-		36,184,
-		55,144,
-		83,108,
-		129,70,
-		189,41,
-		266,30,
-		346,41,
-		396,67,
-		426,89,
-		450,138,
-		457,200,
-		461,765,
-		309,875,
-		308,875,
-		181,948,
-		180,875
+	int Pinball[54] = {
+		198, 912,
+		196, 856,
+		61, 746,
+		60, 195,
+		67, 166,
+		76, 143,
+		89, 120,
+		108, 96,
+		129, 76,
+		153, 60,
+		182, 48,
+		205, 41,
+		229, 36,
+		250, 34,
+		275, 35,
+		308, 42,
+		332, 49,
+		355, 62,
+		375, 75,
+		394, 92,
+		410, 113,
+		421, 136,
+		429, 158,
+		434, 178,
+		438, 769,
+		303, 857,
+		301, 911
 	};
 
-	background_.add(App->physics->CreateChain(0, 0, Pinball, 36, "static"));
+	background_.add(App->physics->CreateChain(0, 0, Pinball, 54, "static"));
 }
