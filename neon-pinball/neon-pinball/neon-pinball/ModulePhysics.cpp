@@ -172,6 +172,62 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, const 
 	return pbody;
 }
 
+b2RevoluteJoint * ModulePhysics::CreatePaddle(PhysBody* A, PhysBody* B, float anchor_x, float anchor_y, int reference_angle, int lower_angle, int upper_angle)
+{
+	b2RevoluteJointDef def;
+	def.bodyA = A->body;
+	def.bodyB = B->body;
+	def.collideConnected = false;
+
+	def.localAnchorA.Set(PIXEL_TO_METERS(anchor_x), PIXEL_TO_METERS(anchor_y));
+	def.localAnchorB.Set(0, 0);
+
+	def.enableLimit = true;
+	def.referenceAngle = reference_angle * DEGTORAD;
+	def.lowerAngle = lower_angle * DEGTORAD;
+	def.upperAngle = upper_angle * DEGTORAD;
+
+	def.enableMotor = true;
+	def.maxMotorTorque = 180;
+
+	return (b2RevoluteJoint*)world->CreateJoint(&def);
+}
+
+PhysBody * ModulePhysics::CreatePolygon(int x, int y, int * points, int size, float density, uint16 category, uint16 mask)
+{
+	b2BodyDef body;
+	body.type = b2_dynamicBody;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+	b2PolygonShape polygon;
+
+	b2Vec2* p = new b2Vec2[size / 2];
+
+	for (uint i = 0; i < size / 2; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
+	}
+	polygon.Set(p, size / 2);
+
+	b2FixtureDef fixture;
+	fixture.density = density;
+	fixture.shape = &polygon;
+	fixture.filter.categoryBits = category;
+	fixture.filter.maskBits = mask;
+	b->CreateFixture(&fixture);
+
+	delete p;
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = 0;
+
+	return pbody;
+}
+
 // 
 update_status ModulePhysics::PostUpdate()
 {
