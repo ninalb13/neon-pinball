@@ -22,6 +22,8 @@ public:
 	
 	p2List<PhysBody*> background_;
 
+	PhysBody* tunnel_1;
+	PhysBody* tunnel_1_2;
 
 	bool sensed;
 
