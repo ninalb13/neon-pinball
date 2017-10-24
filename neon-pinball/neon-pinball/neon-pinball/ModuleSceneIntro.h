@@ -23,11 +23,14 @@ public:
 
 	void ControlTunnels();
 
+	void Control_Tunnels();
 
+	bool Deactivate_Tunnel();
 public:
 
 
 	//tunnels_sensors
+	bool tunnel_on;
 	PhysBody* tunnel_upper_sensor;
 	PhysBody* tunnel_lower_sensor;
 

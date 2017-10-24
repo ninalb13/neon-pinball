@@ -11,6 +11,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 {
 	circle  = NULL;
 	ray_on = false;
+	tunnel_on = false;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -326,4 +327,16 @@ void ModuleSceneIntro::ControlTunnels()
 	}
 }
 
-
+bool ModuleSceneIntro::Deactivate_Tunnel()
+{
+	return true;
+}
+void ModuleSceneIntro::Control_Tunnels()
+{
+	if (tunnel_on == false && tunnel_lower_sensor->body->IsActive() || tunnel_upper_sensor->body->IsActive())
+	{
+		tunnel_on = true;
+	}
+	else
+		tunnel_on = false;
+}
