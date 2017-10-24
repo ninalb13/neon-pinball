@@ -194,9 +194,9 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION di
 
 	int arm_width = 35;
 	int arm_height = 5;
-
-	x = 200;
-	y = 758;
+	
+	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/100, b2_staticBody); //Super small pivot
+	PhysBody* arm = nullptr;
 
 	int reference_angle = 0;
 	int upper_angle = 20;
@@ -204,23 +204,28 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION di
 
 	if (direction == FLIPPER_RIGHT) {
 		reference_angle += 180;
+		arm = App->physics->CreateRectangle(x-arm_width, y, arm_width, arm_height);
+
 	}
+	else if (direction == FLIPPER_LEFT) {
+		arm = App->physics->CreateRectangle(x, y, arm_width, arm_height);
+	}
+
+	////Editing the def
+	CreateRevoluteJointDef(&def, arm, pivot, -5, -15, 15);
 
 	//Angle limits
 	def.enableLimit = true;
 	def.referenceAngle = reference_angle * DEGTORAD;
 	def.lowerAngle = lower_angle * DEGTORAD;
 	def.upperAngle = upper_angle * DEGTORAD;
-
-	PhysBody* arm = App->physics->CreateRectangle(x, y, arm_width, arm_height);
-	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height, b2_staticBody);
-	CreateRevoluteJointDef(&def, arm, pivot, -5, -15, 15);
-
+	
+	//Anchor
 	def.localAnchorA.Set(PIXEL_TO_METERS(-arm_width / 2), PIXEL_TO_METERS(0));
 
+	//Motor
 	def.enableMotor = true;
 	def.maxMotorTorque = 100;
-	def.motorSpeed = 10;
 
 	return (b2RevoluteJoint*)world->CreateJoint(&def);
 }

@@ -33,7 +33,8 @@ bool ModuleSceneIntro::Start()
 
 
 
-	leftFlipper = App->physics->CreateFlipper(10000,10000,FLIPPER_RIGHT);
+	leftFlipper = App->physics->CreateFlipper(200,858,FLIPPER_LEFT); //HARDCODING
+	rightFlipper = App->physics->CreateFlipper(300,858,FLIPPER_RIGHT);
 
 	//sensors for the tunnels
 
@@ -64,11 +65,14 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT)
-	{	
 		leftFlipper->SetMotorSpeed(flipperSpeed);
-	}
 	else
 		leftFlipper->SetMotorSpeed(-flipperSpeed);
+
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
+		rightFlipper->SetMotorSpeed(-flipperSpeed);
+	else
+		rightFlipper->SetMotorSpeed(flipperSpeed);
 
 
 		
