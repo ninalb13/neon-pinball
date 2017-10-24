@@ -183,9 +183,40 @@ void ModulePhysics::CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A
 	//def.lowerAngle = lower_angle * DEGTORAD;
 	//def.upperAngle = upper_angle * DEGTORAD;
 
-	def->enableMotor = true;
-	def->maxMotorTorque = 180;
-	//def.motorSpeed = 10;
+	//def->enableMotor = true;
+	//def->maxMotorTorque = 180;
+	////def.motorSpeed = 10;
+}
+
+b2RevoluteJoint* ModulePhysics::CreateFlipper()
+{
+	b2RevoluteJointDef def;
+
+	int arm_width = 35;
+	int arm_height = 10;
+
+	int x = 200;
+	int y = 858;
+
+	int reference_angle = -20;
+
+
+	//Angle limits
+	def.enableLimit = true;
+	def.referenceAngle = reference_angle * DEGTORAD;
+	//def.lowerAngle = lower_angle * DEGTORAD;
+	//def.upperAngle = upper_angle * DEGTORAD;
+
+	PhysBody* arm = App->physics->CreateRectangle(x, y, arm_width, arm_height);
+	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height / 2, b2_staticBody);
+	CreateRevoluteJointDef(&def, arm, pivot, -5, -15, 15);
+
+	def.localAnchorA.Set(PIXEL_TO_METERS(-arm_width / 2), PIXEL_TO_METERS(0));
+
+	def.enableMotor = true;
+	def.maxMotorTorque = 180;
+
+	return (b2RevoluteJoint*)world->CreateJoint(&def);
 }
 
 PhysBody * ModulePhysics::CreatePolygon(int x, int y, int * points, int size, float density, uint16 category, uint16 mask)
@@ -221,25 +252,6 @@ PhysBody * ModulePhysics::CreatePolygon(int x, int y, int * points, int size, fl
 	pbody->width = pbody->height = 0;
 
 	return pbody;
-}
-
-b2RevoluteJoint* ModulePhysics::CreateFlipper()
-{
-	b2RevoluteJointDef def;
-
-	int arm_width = 50;
-	int arm_height = 10;
-
-	int x = 180;
-	int y = 858;
-
-	PhysBody* arm = App->physics->CreateRectangle(x, y, arm_width, arm_height);
-	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/2, b2_staticBody);
-	CreateRevoluteJointDef(&def, arm, pivot, -5, -15, 15);
-
-	def.localAnchorA.Set(PIXEL_TO_METERS(-arm_width/2), PIXEL_TO_METERS(0));
-
-	return (b2RevoluteJoint*)world->CreateJoint(&def);
 }
 
 // 
