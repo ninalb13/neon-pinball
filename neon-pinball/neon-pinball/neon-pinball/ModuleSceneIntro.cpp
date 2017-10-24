@@ -29,7 +29,7 @@ bool ModuleSceneIntro::Start()
 
 	Create_Limits();
 
-	App->physics->CreateCircle(100, 100, 50);
+	App->physics->CreateCircle(100, 200, 10);
 
 	int left_kicker_vertices[8] = {
 		0, 7,
