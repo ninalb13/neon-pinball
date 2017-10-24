@@ -38,6 +38,11 @@ bool ModuleSceneIntro::Start()
 		48, 2
 	};
 	
+	//sensors for the tunnels
+
+	tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6);
+	tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9);
+
 	PhysBody* left_kicker = App->physics->CreatePolygon(180, 768, left_kicker_vertices, 8, 1.0f, 0x0001, 0x0004);
 	PhysBody* B = App->physics->CreateCircle(180, 768, 7);
 	b2RevoluteJoint* rev_joint_left = App->physics->CreatePaddle(left_kicker, B, 0, 0, -5, -15, 15);
@@ -120,70 +125,120 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 void ModuleSceneIntro::Create_Limits()
 {
 	//tunnels
-	// Pivot 0, 0
-	int Tunnel_1[48] = {
-		149, 200,
-		140, 179,
-		125, 169,
-		112, 180,
-		114, 192,
-		125, 199,
-		375, 331,
-		392, 345,
-		402, 360,
-		405, 379,
-		392, 429,
-		384, 425,
-		394, 380,
-		393, 365,
-		383, 351,
-		368, 339,
-		119, 208,
-		104, 197,
-		102, 173,
-		113, 161,
-		128, 159,
-		141, 164,
-		152, 175,
-		160, 199
+		//tunnel 1
+	//long chain
+		// Pivot 0, 0
+	int long_chain[8] = {
+		351, 366,
+		93, 237,
+		97, 226,
+		357, 357
 	};
 
-	tunnel_1 = App->physics->CreateChain(0, 0, Tunnel_1, 48, "static");
-
+	longchain = App->physics->CreateChain(0, 0, long_chain, 8, "static");
 
 	// Pivot 0, 0
-	int Tunnel_1_2[56] = {
-		350, 408,
-		356, 415,
-		367, 397,
-		368, 380,
-		357, 358,
-		83, 218,
-		69, 197,
-		69, 176,
-		80, 151,
-		98, 133,
-		121, 129,
-		145, 133,
-		167, 145,
-		181, 166,
+	int long_chain_2[8] = {
+		112, 204,
+		116, 194,
+		375, 330,
+		371, 340
+	};
+
+	longchain_2 = App->physics->CreateChain(0, 0, long_chain_2, 8, "static");
+
+	//upper_curve
+	// Pivot 0, 0
+	int upper_curve_outside[46] = {
+		89, 231,
+		67, 216,
+		58, 191,
+		64, 158,
+		83, 132,
+		114, 119,
+		148, 124,
+		173, 139,
+		184, 153,
+		190, 169,
+		197, 189,
+		200, 199,
 		190, 200,
-		200, 200,
-		190, 160,
-		173, 136,
-		146, 124,
-		120, 120,
-		93, 126,
-		71, 147,
-		60, 173,
-		56, 198,
-		76, 224,
-		350, 364,
-		358, 378,
+		183, 172,
+		169, 148,
+		148, 136,
+		122, 129,
+		104, 131,
+		86, 143,
+		71, 171,
+		69, 202,
+		85, 218,
+		96, 225
+	};
+
+	uppercurve = App->physics->CreateChain(0, 0, upper_curve_outside, 46, "static");
+
+	// Pivot 0, 0
+	int upper_curve_inside[36] = {
+		150, 200,
+		160, 200,
+		155, 182,
+		142, 164,
+		129, 160,
+		116, 162,
+		106, 169,
+		102, 181,
+		104, 193,
+		110, 202,
+		121, 208,
+		126, 200,
+		113, 192,
+		112, 183,
+		115, 173,
+		123, 170,
+		135, 172,
+		143, 181
+	};
+
+	uppercurve_2 = App->physics->CreateChain(0, 0, upper_curve_inside, 36, "static");
+
+	// Pivot 0, 0
+	int lower_curve_inside[20] = {
+		351, 410,
+		358, 415,
+		367, 398,
+		368, 379,
+		363, 364,
+		354, 356,
+		345, 363,
+		354, 370,
+		358, 382,
 		358, 393
 	};
 
-	tunnel_1_2 = App->physics->CreateChain(0, 0, Tunnel_1_2, 56, "static");
+	lowercurve = App->physics->CreateChain(0, 0, lower_curve_inside, 20, "static");
+
+	// Pivot 0, 0
+	int lower_curve_outside[32] = {
+		385, 427,
+		392, 430,
+		398, 414,
+		405, 397,
+		405, 382,
+		405, 365,
+		396, 351,
+		387, 340,
+		376, 334,
+		368, 340,
+		377, 345,
+		385, 352,
+		393, 363,
+		397, 374,
+		396, 389,
+		390, 410
+	};
+
+	lowercurve_2 = App->physics->CreateChain(0, 0, lower_curve_outside, 32, "static");
+
 	// Pivot 0, 0
 	int Pinball[54] = {
 		198, 912,

@@ -19,11 +19,23 @@ public:
 	void Create_Limits();
 
 public:
-	
+
+
+	//tunnels_sensors
+	PhysBody* tunnel_upper_sensor;
+	PhysBody* tunnel_lower_sensor;
+
+
+
 	p2List<PhysBody*> background_;
 
-	PhysBody* tunnel_1;
-	PhysBody* tunnel_1_2;
+	//tunnels
+	PhysBody* longchain;
+	PhysBody* longchain_2;
+	PhysBody* uppercurve;
+	PhysBody* uppercurve_2;
+	PhysBody* lowercurve;
+	PhysBody* lowercurve_2;
 
 	bool sensed;
 
