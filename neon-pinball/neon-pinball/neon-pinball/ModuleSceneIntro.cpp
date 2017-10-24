@@ -11,7 +11,6 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 {
 	circle  = NULL;
 	ray_on = false;
-	sensed = false;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -29,7 +28,7 @@ bool ModuleSceneIntro::Start()
 
 	Create_Limits();
 
-	App->physics->CreateCircle(100, 200, 10, b2_dynamicBody);
+	App->physics->CreateCircle(100, 190, 10, b2_dynamicBody);
 
 
 
@@ -41,7 +40,12 @@ bool ModuleSceneIntro::Start()
 	tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6);
 	tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9);
 
-
+	//First desactivate all tunnels
+	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
+	while (tunnels_iterator) {
+		tunnels_iterator->data->body->SetActive(false);
+		tunnels_iterator = tunnels_iterator->next;
+	}
 
 	return ret;
 }
@@ -57,6 +61,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	ControlTunnels();
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		ray_on = !ray_on;
@@ -113,16 +118,16 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
 	if (bodyB == tunnel_upper_sensor || bodyB == tunnel_lower_sensor)
 	{
-		activate_tunnel = !activate_tunnel;
+		insideTunnel = !insideTunnel;
 	}
-
 }
 
 void ModuleSceneIntro::Create_Limits()
 {
+
+	
 	//tunnels
 		//tunnel 1
 	//long chain
@@ -134,7 +139,7 @@ void ModuleSceneIntro::Create_Limits()
 		357, 357
 	};
 
-	longchain = App->physics->CreateChain(0, 0, long_chain, 8, "static");
+	tunnels_list.add(longchain = App->physics->CreateChain(0, 0, long_chain, 8, "static"));
 
 	// Pivot 0, 0
 	int long_chain_2[8] = {
@@ -144,7 +149,7 @@ void ModuleSceneIntro::Create_Limits()
 		371, 340
 	};
 
-	longchain_2 = App->physics->CreateChain(0, 0, long_chain_2, 8, "static");
+	tunnels_list.add(longchain_2 = App->physics->CreateChain(0, 0, long_chain_2, 8, "static"));
 
 	//upper_curve
 	// Pivot 0, 0
@@ -268,3 +273,22 @@ void ModuleSceneIntro::Create_Limits()
 
 	background_.add(App->physics->CreateChain(0, 0, Pinball, 50, "static"));
 }
+
+void ModuleSceneIntro::ControlTunnels()
+{
+	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
+
+	if (insideTunnel) {
+		while (tunnels_iterator) {
+			tunnels_iterator->data->body->SetActive(true);
+			tunnels_iterator = tunnels_iterator->next;
+		}
+	}
+	else {
+		while (tunnels_iterator) {
+			tunnels_iterator->data->body->SetActive(false);
+			tunnels_iterator = tunnels_iterator->next;
+		}
+	}
+}
+

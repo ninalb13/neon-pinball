@@ -18,7 +18,7 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void Create_Limits();
-	void Check();
+	void ControlTunnels();
 
 public:
 
@@ -27,11 +27,10 @@ public:
 	PhysBody* tunnel_upper_sensor;
 	PhysBody* tunnel_lower_sensor;
 
-
-
 	p2List<PhysBody*> background_;
 
 	//tunnels
+	p2List<PhysBody*> tunnels_list;
 	PhysBody* longchain;
 	PhysBody* longchain_2;
 	PhysBody* uppercurve;
@@ -39,8 +38,7 @@ public:
 	PhysBody* lowercurve;
 	PhysBody* lowercurve_2;
 
-	bool sensed;
-	bool activate_tunnel;
+	bool insideTunnel;
 
 	SDL_Texture* background;
 	SDL_Texture* circle;
@@ -54,5 +52,5 @@ public:
 	//Flippers
 	b2RevoluteJoint*  leftFlipper;
 	b2RevoluteJoint*  rightFlipper;
-	float flipperSpeed = 30.00f;
+	float flipperSpeed = 10.00f;
 };
