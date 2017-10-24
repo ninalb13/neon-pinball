@@ -173,39 +173,33 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, const 
 
 	return pbody;
 }
-void ModulePhysics::CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A, PhysBody* B, int reference_angle, int lower_angle, int upper_angle)
+void ModulePhysics::CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A, PhysBody* B)
 {
 	def->bodyA = A->body;
 	def->bodyB = B->body;
 	def->collideConnected = false;
-
-	//def.enableLimit = true;
-	//def.referenceAngle = reference_angle * DEGTORAD;
-	//def.lowerAngle = lower_angle * DEGTORAD;
-	//def.upperAngle = upper_angle * DEGTORAD;
-
-	//def->enableMotor = true;
-	//def->maxMotorTorque = 180;
-	////def.motorSpeed = 10;
 }
 
 b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION direction)
 {
 	b2RevoluteJointDef def;
 
-	int arm_width = 35;
-	int arm_height = 5;
+	int arm_width = 45;
+	int arm_height = 7;
 	
 	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/100, b2_staticBody, 0.0f); //Super small pivot
 	PhysBody* arm = nullptr;
 
-	int reference_angle = 0;
+	int reference_angle = 0; 
 	int upper_angle = 20;
 	int lower_angle = -20;
 
 	if (direction == FLIPPER_RIGHT) {
 		reference_angle += 180;
 		arm = App->physics->CreateRectangle(x-arm_width, y, arm_width, arm_height);
+		//int temp_angle = upper_angle; //To swap angles
+		//upper_angle = lower_angle;
+		//lower_angle = temp_angle;
 
 	}
 	else if (direction == FLIPPER_LEFT) {
@@ -213,7 +207,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION di
 	}
 
 	////Editing the def
-	CreateRevoluteJointDef(&def, arm, pivot, -5, -15, 15);
+	CreateRevoluteJointDef(&def, arm, pivot);
 
 	//Angle limits
 	def.enableLimit = true;
@@ -345,36 +339,13 @@ update_status ModulePhysics::PostUpdate()
 			break;
 			}
 
-			//To drag things with the mouse
-			if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
-				getMousePositionInMeters(&mouse_x, &mouse_y);
-				if (f->TestPoint(mouse_position)) {
-					body_found = b;
-					mouse_cliked = true;
-				}
-				else
-					mouse_cliked = false;
-			}
+			// TODO 1: If mouse button 1 is pressed ...
+			// App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN
+			// test if the current body contains mouse position
+
 		}
 	}
 
-
-	// If a body was selected we will attach a mouse joint to it
-	// so we can pull it around
-	// TODO 2: If a body was selected, create a mouse joint
-	// using mouse_joint class property
-	if (body_found) {
-		b2MouseJointDef def;
-		def.bodyA = ground;
-		def.bodyB = body_found;
-		def.target = mouse_position;
-		def.dampingRatio = 0.5f;
-		def.frequencyHz = 2.0f;
-		def.maxForce = 100.0f * body_found->GetMass();
-		mouse_joint = (b2MouseJoint*)world->CreateJoint(&def);
-	}
-
-	
 
 	// If a body was selected we will attach a mouse joint to it
 	// so we can pull it around
@@ -385,7 +356,11 @@ update_status ModulePhysics::PostUpdate()
 	// TODO 3: If the player keeps pressing the mouse button, update
 	// target position and draw a red line between both anchor points
 
+
+
+
 	// TODO 4: If the player releases the mouse button, destroy the joint
+
 
 	return UPDATE_CONTINUE;
 }
