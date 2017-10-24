@@ -219,7 +219,7 @@ void ModuleSceneIntro::Create_Limits()
 
 	// Pivot 0, 0
 	int lower_curve_outside[32] = {
-		385, 427,
+		386, 427,
 		392, 430,
 		398, 414,
 		405, 397,
@@ -227,8 +227,8 @@ void ModuleSceneIntro::Create_Limits()
 		405, 365,
 		396, 351,
 		387, 340,
-		376, 334,
-		368, 340,
+		377, 334,
+		370, 340,
 		377, 345,
 		385, 352,
 		393, 363,
