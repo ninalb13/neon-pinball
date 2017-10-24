@@ -58,10 +58,11 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -171,26 +172,20 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, const 
 
 	return pbody;
 }
-
-b2RevoluteJoint * ModulePhysics::CreatePaddle(PhysBody* A, PhysBody* B, float anchor_x, float anchor_y, int reference_angle, int lower_angle, int upper_angle)
+void ModulePhysics::CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A, PhysBody* B, int reference_angle, int lower_angle, int upper_angle)
 {
-	b2RevoluteJointDef def;
-	def.bodyA = A->body;
-	def.bodyB = B->body;
-	def.collideConnected = false;
+	def->bodyA = A->body;
+	def->bodyB = B->body;
+	def->collideConnected = false;
 
-	def.localAnchorA.Set(PIXEL_TO_METERS(anchor_x), PIXEL_TO_METERS(anchor_y));
-	def.localAnchorB.Set(0, 0);
+	//def.enableLimit = true;
+	//def.referenceAngle = reference_angle * DEGTORAD;
+	//def.lowerAngle = lower_angle * DEGTORAD;
+	//def.upperAngle = upper_angle * DEGTORAD;
 
-	def.enableLimit = true;
-	def.referenceAngle = reference_angle * DEGTORAD;
-	def.lowerAngle = lower_angle * DEGTORAD;
-	def.upperAngle = upper_angle * DEGTORAD;
-
-	def.enableMotor = true;
-	def.maxMotorTorque = 180;
-
-	return (b2RevoluteJoint*)world->CreateJoint(&def);
+	def->enableMotor = true;
+	def->maxMotorTorque = 180;
+	//def.motorSpeed = 10;
 }
 
 PhysBody * ModulePhysics::CreatePolygon(int x, int y, int * points, int size, float density, uint16 category, uint16 mask)
@@ -226,6 +221,25 @@ PhysBody * ModulePhysics::CreatePolygon(int x, int y, int * points, int size, fl
 	pbody->width = pbody->height = 0;
 
 	return pbody;
+}
+
+b2RevoluteJoint* ModulePhysics::CreateFlipper()
+{
+	b2RevoluteJointDef def;
+
+	int arm_width = 50;
+	int arm_height = 10;
+
+	int x = 180;
+	int y = 858;
+
+	PhysBody* arm = App->physics->CreateRectangle(x, y, arm_width, arm_height);
+	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/2, b2_staticBody);
+	CreateRevoluteJointDef(&def, arm, pivot, -5, -15, 15);
+
+	def.localAnchorA.Set(PIXEL_TO_METERS(-arm_width/2), PIXEL_TO_METERS(0));
+
+	return (b2RevoluteJoint*)world->CreateJoint(&def);
 }
 
 // 
