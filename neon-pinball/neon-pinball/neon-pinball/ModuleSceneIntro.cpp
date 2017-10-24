@@ -101,20 +101,11 @@ update_status ModuleSceneIntro::Update()
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
-
-
-	/*
-	if(bodyA)
+	if (bodyB == tunnel_upper_sensor || bodyB == tunnel_lower_sensor)
 	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+		activate_tunnel = !activate_tunnel;
 	}
 
-	if(bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}*/
 }
 
 void ModuleSceneIntro::Create_Limits()
@@ -233,37 +224,34 @@ void ModuleSceneIntro::Create_Limits()
 	};
 
 	lowercurve_2 = App->physics->CreateChain(0, 0, lower_curve_outside, 32, "static");
-
 	// Pivot 0, 0
-	int Pinball[54] = {
-		198, 912,
-		196, 856,
-		61, 746,
-		60, 195,
-		67, 166,
-		76, 143,
-		89, 120,
-		108, 96,
-		129, 76,
-		153, 60,
-		182, 48,
-		205, 41,
-		229, 36,
-		250, 34,
-		275, 35,
-		308, 42,
-		332, 49,
-		355, 62,
-		375, 75,
-		394, 92,
-		410, 113,
-		421, 136,
-		429, 158,
-		434, 178,
-		438, 769,
-		303, 857,
-		301, 911
+	int Pinball[50] = {
+		197, 853,
+		158, 856,
+		157, 910,
+		341, 910,
+		340, 862,
+		303, 853,
+		432, 768,
+		431, 205,
+		428, 176,
+		417, 143,
+		402, 112,
+		378, 85,
+		347, 64,
+		310, 49,
+		274, 42,
+		235, 43,
+		202, 48,
+		166, 61,
+		141, 75,
+		114, 96,
+		95, 115,
+		83, 141,
+		68, 168,
+		65, 208,
+		67, 746
 	};
 
-	background_.add(App->physics->CreateChain(0, 0, Pinball, 54, "static"));
+	background_.add(App->physics->CreateChain(0, 0, Pinball, 50, "static"));
 }

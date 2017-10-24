@@ -17,6 +17,7 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void Create_Limits();
+	void Check();
 
 public:
 
@@ -38,6 +39,7 @@ public:
 	PhysBody* lowercurve_2;
 
 	bool sensed;
+	bool activate_tunnel;
 
 	SDL_Texture* background;
 	SDL_Texture* circle;
