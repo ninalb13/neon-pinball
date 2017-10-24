@@ -33,7 +33,7 @@ bool ModuleSceneIntro::Start()
 
 
 
-	leftFlipper = App->physics->CreateFlipper(FLIPPER_RIGHT);
+	leftFlipper = App->physics->CreateFlipper(10000,10000,FLIPPER_RIGHT);
 
 	//sensors for the tunnels
 

@@ -188,15 +188,15 @@ void ModulePhysics::CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A
 	////def.motorSpeed = 10;
 }
 
-b2RevoluteJoint* ModulePhysics::CreateFlipper(FLIPPER_DIRECTION direction)
+b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION direction)
 {
 	b2RevoluteJointDef def;
 
 	int arm_width = 35;
 	int arm_height = 5;
 
-	int x = 200;
-	int y = 758;
+	x = 200;
+	y = 758;
 
 	int reference_angle = 0;
 	int upper_angle = 20;
