@@ -32,7 +32,7 @@ bool ModuleSceneIntro::Start()
 	App->physics->CreateCircle(100, 200, 10, b2_dynamicBody, 0.0f);
 
 
-	App->physics->CreateCircle(100, 190, 10, b2_dynamicBody);
+	App->physics->CreateCircle(100, 190, 10, b2_dynamicBody, 0.0f);
 
 
 
@@ -277,16 +277,34 @@ void ModuleSceneIntro::Create_Limits()
 	};
 
 	background_.add(App->physics->CreateChain(0, 0, Pinball, 50, "static"));
+
+	//triangles
+	// Pivot 0, 0
+	int Triangleleft[6] = {
+		99, 622,
+		98, 730,
+		189, 787
+	};
+
+	left_triangle = App->physics->CreateChain(0, 0, Triangleleft, 6, "static");
+
+	// Pivot 0, 0
+	int Triangleright[6] = {
+		401, 622,
+		401, 730,
+		314, 785
+	};
+	right_triangle = App->physics->CreateChain(0, 0, Triangleright, 6, "static");
 }
 
 
 void ModuleSceneIntro::Create_Bouncers()
 {
-	bouncer_1 = App->physics->CreateCircle(253, 141, 23, b2_staticBody, 4.00f);
-	bouncer_2 = App->physics->CreateCircle(326, 176, 23, b2_staticBody, 4.00f);
-	bouncer_3 = App->physics->CreateCircle(155, 447, 23, b2_staticBody, 4.00f);
-	bouncer_4 = App->physics->CreateCircle(225, 490, 23, b2_staticBody, 4.00f);
-	bouncer_5 = App->physics->CreateCircle(303, 500, 23, b2_staticBody, 4.00f);
+	bouncer_1 = App->physics->CreateCircle(253, 141, 23, b2_staticBody, 2.00f);
+	bouncer_2 = App->physics->CreateCircle(326, 176, 23, b2_staticBody, 2.00f);
+	bouncer_3 = App->physics->CreateCircle(155, 447, 23, b2_staticBody, 2.00f);
+	bouncer_4 = App->physics->CreateCircle(225, 490, 23, b2_staticBody, 2.00f);
+	bouncer_5 = App->physics->CreateCircle(303, 500, 23, b2_staticBody, 2.00f);
 }
 
 void ModuleSceneIntro::ControlTunnels()

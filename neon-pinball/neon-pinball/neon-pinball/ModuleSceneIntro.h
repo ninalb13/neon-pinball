@@ -66,6 +66,9 @@ public:
 	PhysBody* bouncer_4;
 	PhysBody* bouncer_5;
 
-	float flipperSpeed = 10.00f;
-
+//float flipperSpeed = 10.00f;
+	
+	//triangles
+	PhysBody* left_triangle;
+	PhysBody* right_triangle;
 };
