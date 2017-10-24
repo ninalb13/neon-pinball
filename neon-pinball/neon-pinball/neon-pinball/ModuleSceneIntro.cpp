@@ -29,23 +29,15 @@ bool ModuleSceneIntro::Start()
 
 	Create_Limits();
 
-	App->physics->CreateCircle(100, 200, 10);
+	App->physics->CreateCircle(100, 200, 10, b2_dynamicBody);
 
-	int left_kicker_vertices[8] = {
-		0, 7,
-		0, -7,
-		48, -2,
-		48, 2
-	};
-	
-	PhysBody* left_kicker = App->physics->CreatePolygon(180, 768, left_kicker_vertices, 8, 1.0f, 0x0001, 0x0004);
-	PhysBody* B = App->physics->CreateCircle(180, 768, 7);
-	b2RevoluteJoint* rev_joint_left = App->physics->CreatePaddle(left_kicker, B, 0, 0, -5, -15, 15);
+
+	App->physics->CreateKicker();
 
 	return ret;
 }
 
-// Load assets
+// Load assetsa
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");

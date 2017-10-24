@@ -13,6 +13,7 @@
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
 // Small class to return to other modules to track position and rotation of physics bodies
+
 class PhysBody
 {
 public:
@@ -42,12 +43,13 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius);
+	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type);
 	PhysBody* CreateRectangle(int x, int y, int width, int height);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, const char* type);
-	b2RevoluteJoint* CreatePaddle(PhysBody* A, PhysBody* B, float anchor_x, float anchor_y, int reference_angle, int lower_angle, int upper_angle);
-	PhysBody* CreatePolygon(int x, int y, int* points, int size, float density, uint16 category, uint16 mask);
+	b2RevoluteJoint* CreateRevoluteJoint(PhysBody* A, PhysBody* B, int reference_angle, int lower_angle, int upper_angle);
+	PhysBody* CreatePolygon(int x, int y, int* points, int size, float density, uint16 category, uint16 mask);  //Cal revisar-lo
+	void CreateKicker();
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
