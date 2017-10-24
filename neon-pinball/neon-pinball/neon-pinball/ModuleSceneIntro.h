@@ -51,5 +51,5 @@ public:
 
 	//Flippers
 	b2RevoluteJoint*  leftFlipper;
-	float flipperSpeed = 10;
+	float flipperSpeed = 100.00f;
 };
