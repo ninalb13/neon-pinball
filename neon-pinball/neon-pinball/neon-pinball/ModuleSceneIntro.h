@@ -18,7 +18,7 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void Create_Limits();
-	void Check();
+	void Create_Bouncers();
 
 public:
 
@@ -55,4 +55,11 @@ public:
 	b2RevoluteJoint*  leftFlipper;
 	b2RevoluteJoint*  rightFlipper;
 	float flipperSpeed = 30.00f;
+
+	//Bouncers
+	PhysBody* bouncer_1;
+	PhysBody* bouncer_2;
+	PhysBody* bouncer_3;
+	PhysBody* bouncer_4;
+	PhysBody* bouncer_5;
 };

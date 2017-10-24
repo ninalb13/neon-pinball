@@ -28,8 +28,8 @@ bool ModuleSceneIntro::Start()
 	background = App->textures->Load("pinball/Pinball.png");
 
 	Create_Limits();
-
-	App->physics->CreateCircle(100, 200, 10, b2_dynamicBody);
+	Create_Bouncers();
+	App->physics->CreateCircle(100, 200, 10, b2_dynamicBody, 0.0f);
 
 
 
@@ -267,4 +267,13 @@ void ModuleSceneIntro::Create_Limits()
 	};
 
 	background_.add(App->physics->CreateChain(0, 0, Pinball, 50, "static"));
+}
+
+void ModuleSceneIntro::Create_Bouncers()
+{
+	bouncer_1 = App->physics->CreateCircle(253, 141, 23, b2_staticBody, 4.00f);
+	bouncer_2 = App->physics->CreateCircle(326, 176, 23, b2_staticBody, 4.00f);
+	bouncer_3 = App->physics->CreateCircle(155, 447, 23, b2_staticBody, 4.00f);
+	bouncer_4 = App->physics->CreateCircle(225, 490, 23, b2_staticBody, 4.00f);
+	bouncer_5 = App->physics->CreateCircle(303, 500, 23, b2_staticBody, 4.00f);
 }

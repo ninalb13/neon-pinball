@@ -58,7 +58,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type, float restitution)
 {
 	b2BodyDef body;
 
@@ -72,6 +72,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type)
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
+	fixture.restitution = restitution; 
 
 	b->CreateFixture(&fixture);
 
@@ -195,7 +196,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION di
 	int arm_width = 35;
 	int arm_height = 5;
 	
-	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/100, b2_staticBody); //Super small pivot
+	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/100, b2_staticBody, 0.0f); //Super small pivot
 	PhysBody* arm = nullptr;
 
 	int reference_angle = 0;
