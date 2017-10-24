@@ -33,7 +33,7 @@ bool ModuleSceneIntro::Start()
 
 
 
-	App->physics->CreateFlipper();
+	leftFlipper = App->physics->CreateFlipper();
 
 	//sensors for the tunnels
 
@@ -61,6 +61,11 @@ update_status ModuleSceneIntro::Update()
 		ray_on = !ray_on;
 		ray.x = App->input->GetMouseX();
 		ray.y = App->input->GetMouseY();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	{
+		leftFlipper->SetMotorSpeed(flipperSpeed);
 	}
 		
 	//ball = App->physics->CreateCircle(490, 800, 15, "static", 0x0004, 0x0001);

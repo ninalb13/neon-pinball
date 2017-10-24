@@ -3,6 +3,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "ModulePhysics.h"
 
 class PhysBody;
 
@@ -47,4 +48,8 @@ public:
 
 	//Bodies
 	PhysBody* ball;
+
+	//Flippers
+	b2RevoluteJoint*  leftFlipper;
+	float flipperSpeed = 10;
 };
