@@ -189,7 +189,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION di
 	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/100, b2_staticBody); //Super small pivot
 	PhysBody* arm = nullptr;
 
-	int reference_angle = 10;
+	int reference_angle = 0; 
 	int upper_angle = 20;
 	int lower_angle = -20;
 
