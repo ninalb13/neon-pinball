@@ -33,7 +33,7 @@ bool ModuleSceneIntro::Start()
 
 
 
-	App->physics->CreateKicker();
+	App->physics->CreateFlipper();
 
 	//sensors for the tunnels
 

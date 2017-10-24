@@ -47,9 +47,9 @@ public:
 	PhysBody* CreateRectangle(int x, int y, int width, int height);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, const char* type);
-	b2RevoluteJoint* CreateRevoluteJoint(PhysBody* A, PhysBody* B, int reference_angle, int lower_angle, int upper_angle);
+	void CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A, PhysBody* B, int reference_angle, int lower_angle, int upper_angle);
 	PhysBody* CreatePolygon(int x, int y, int* points, int size, float density, uint16 category, uint16 mask);  //Cal revisar-lo
-	void CreateKicker();
+	b2RevoluteJoint* CreateFlipper();
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
