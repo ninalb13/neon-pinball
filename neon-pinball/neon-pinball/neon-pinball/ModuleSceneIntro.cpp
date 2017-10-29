@@ -12,8 +12,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	circle  = NULL;
 	ray_on = false;
 	tunnel_on = false;
-	win = false;
-	gameover = false;
+	
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -36,8 +35,8 @@ bool ModuleSceneIntro::Start()
 	/*App->physics->CreateCircle(100, 200, 10, b2_dynamicBody, 0.0f);*/
 
 
-	App->physics->CreateCircle(100, 190, 10, b2_dynamicBody, 0.0f, BALL, BOUNCER);
-
+	ball = App->physics->CreateCircle(100, 190, 10, b2_dynamicBody, 0.0f, BALL, BOUNCER);
+	ball->listener = this;
 	//death sensor
 	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15);
 
@@ -105,12 +104,12 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	//delete ball
-	if (delete_ball == true)
-	{
-		App->physics->DeleteBody(ball->body);
-		ball = nullptr;
-		delete_ball = false;
-	}
+	//if (delete_ball == true)
+	//{
+	//	App->physics->DeleteBody(ball->body);
+	//	ball = nullptr;
+	//	delete_ball = false;
+	//}
 	// All draw functions ------------------------------------------------------
 
 
@@ -134,18 +133,7 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyB == tunnel_upper_sensor || bodyB == tunnel_lower_sensor)
-	{
-		insideTunnel = !insideTunnel;
-	}
-	else if (bodyB == death_sensor)
-	{
-		if (!win)
-		{
-			gameover = true;
-			delete_ball = true;
-		}
-	}
+	LOG("HELLO");
 }
 
 void ModuleSceneIntro::Create_Limits()

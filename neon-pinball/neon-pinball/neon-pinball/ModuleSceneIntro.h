@@ -28,10 +28,11 @@ public:
 	bool Deactivate_Tunnel();
 public:
 
-	bool win;
-	bool gameover;
+
 	bool delete_ball;
 	PhysBody* death_sensor;
+
+
 	//tunnels_sensors
 	bool tunnel_on;
 	PhysBody* tunnel_upper_sensor;
