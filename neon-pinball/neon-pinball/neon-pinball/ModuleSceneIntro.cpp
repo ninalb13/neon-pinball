@@ -36,7 +36,7 @@ bool ModuleSceneIntro::Start()
 	/*App->physics->CreateCircle(100, 200, 10, b2_dynamicBody, 0.0f);*/
 
 
-	App->physics->CreateCircle(100, 190, 10, b2_dynamicBody, 0.0f, BALL, DEATH_SENSOR);
+	App->physics->CreateCircle(100, 190, 10, b2_dynamicBody, 0.0f, BALL, BOUNCER);
 
 	//death sensor
 	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15);
@@ -90,7 +90,7 @@ update_status ModuleSceneIntro::Update()
 
 
 		
-	ball = App->physics->CreateCircle(490, 800, 15, b2_dynamicBody, 0.1f, BALL, BOUNCER);
+	/*ball = App->physics->CreateCircle(490, 800, 15, b2_dynamicBody, 0.1f, 0x0001, 0x0004);*/
 
 	App->renderer->Blit(background, 0, 0);
 
