@@ -4,7 +4,7 @@
 #include "p2Point.h"
 #include "Globals.h"
 #include "ModulePhysics.h"
-
+enum Game_states { PLAYING, WAITING, FINISHED };
 class PhysBody;
 
 class ModuleSceneIntro : public Module
@@ -33,6 +33,7 @@ public:
 	bool delete_ball;
 	PhysBody* death_sensor;
 
+	Game_states game_state = WAITING;
 
 	//tunnels_sensors
 	bool tunnel_on;

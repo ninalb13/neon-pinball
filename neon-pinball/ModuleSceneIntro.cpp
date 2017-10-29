@@ -9,10 +9,11 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	circle  = NULL;
+	circle = NULL;
+	background = NULL;
 	ray_on = false;
 	tunnel_on = false;
-	
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -27,6 +28,8 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	background = App->textures->Load("pinball/Pinball.png");
+	circle = App->textures->Load("pinball/wheel.png");
+
 
 	Create_Limits();
 	Create_Bouncers();
@@ -35,8 +38,8 @@ bool ModuleSceneIntro::Start()
 	//death sensor
 	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15, BOUNCER, BALL);
 
-	leftFlipper = App->physics->CreateFlipper(200,858,FLIPPER_LEFT); //HARDCODING
-	rightFlipper = App->physics->CreateFlipper(300,858,FLIPPER_RIGHT);
+	leftFlipper = App->physics->CreateFlipper(200, 858, FLIPPER_LEFT); //HARDCODING
+	rightFlipper = App->physics->CreateFlipper(300, 858, FLIPPER_RIGHT);
 
 	//sensors for the tunnels
 
@@ -68,7 +71,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		SpawnBall(0);
+
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
@@ -82,25 +85,35 @@ update_status ModuleSceneIntro::Update()
 		ray.y = App->input->GetMouseY();
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {
+		if (game_state == WAITING) {
+			SpawnBall(0);
+			game_state = PLAYING;
+		}
 		leftFlipper->SetMotorSpeed(flipperSpeed);
+	}
 	else
 		leftFlipper->SetMotorSpeed(-flipperSpeed);
 
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
+		if (game_state == WAITING) {
+			SpawnBall(1);
+			game_state = PLAYING;
+		}
 		rightFlipper->SetMotorSpeed(-flipperSpeed);
+	}
 	else
 		rightFlipper->SetMotorSpeed(flipperSpeed);
 
 
-		
+
 	/*ball = App->physics->CreateCircle(490, 800, 15, b2_dynamicBody, 0.1f, 0x0001, 0x0004);*/
 
 	App->renderer->Blit(background, 0, 0);
 
 
 	// Prepare for raycast ------------------------------------------------------
-	
+
 	iPoint mouse;
 	mouse.x = App->input->GetMouseX();
 	mouse.y = App->input->GetMouseY();
@@ -115,19 +128,18 @@ update_status ModuleSceneIntro::Update()
 	//	ball = nullptr;
 	//	delete_ball = false;
 	//}
-	// All draw functions ------------------------------------------------------
-	
+
 
 	// ray -----------------
-	if(ray_on == true)
+	if (ray_on == true)
 	{
-		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
+		fVector destination(mouse.x - ray.x, mouse.y - ray.y);
 		destination.Normalize();
 		destination *= ray_hit;
 
 		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
 
-		if(normal.x != 0.0f)
+		if (normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
@@ -143,16 +155,18 @@ void ModuleSceneIntro::DrawEverything()
 	int y = 0;
 
 	//Ball
-	//ball->GetPosition(x, y);
-	//App->renderer->Blit(circle, x, y, NULL, 1.0f, ball->GetRotation());
+	if (game_state == PLAYING) {
+		ball->GetPosition(x, y);
+		App->renderer->Blit(circle, x, y, NULL, 1.0f, ball->GetRotation());
+	}
 
 
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if(bodyB == death_sensor)
-	LOG("HELLO");
+	if (bodyB == death_sensor)
+		LOG("HELLO");
 	if (bodyB == tunnel_lower_sensor || bodyB == tunnel_upper_sensor) {
 		insideTunnel = !insideTunnel;
 	}
@@ -171,7 +185,7 @@ void ModuleSceneIntro::Create_Limits()
 		357, 357
 	};
 
-	tunnels_list.add(longchain = App->physics->CreateChain(0, 0, long_chain, 8, "static", BOUNCER,BALL));
+	tunnels_list.add(longchain = App->physics->CreateChain(0, 0, long_chain, 8, "static", BOUNCER, BALL));
 
 	// Pivot 0, 0
 	int long_chain_2[8] = {
