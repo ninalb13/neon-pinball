@@ -136,6 +136,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	if(bodyB == death_sensor)
 	LOG("HELLO");
+	if (bodyB == tunnel_lower_sensor || bodyB == tunnel_upper_sensor) {
+		insideTunnel = !insideTunnel;
+	}
 }
 
 void ModuleSceneIntro::Create_Limits()
