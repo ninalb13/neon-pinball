@@ -94,7 +94,7 @@ PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution
 	return nullptr;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask)
 {
 	b2BodyDef body;
 	body.type = b2_dynamicBody;
@@ -107,6 +107,8 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 	b2FixtureDef fixture;
 	fixture.shape = &box;
 	fixture.density = 1.0f;
+	fixture.filter.categoryBits = category;
+	fixture.filter.maskBits = mask;
 
 	b->CreateFixture(&fixture);
 
@@ -210,14 +212,14 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION di
 
 	if (direction == FLIPPER_RIGHT) {
 		reference_angle += 180;
-		arm = App->physics->CreateRectangle(x-arm_width, y, arm_width, arm_height);
+		arm = App->physics->CreateRectangle(x-arm_width, y, arm_width, arm_height, BOUNCER,BALL);
 		//int temp_angle = upper_angle; //To swap angles
 		//upper_angle = lower_angle;
 		//lower_angle = temp_angle;
 
 	}
 	else if (direction == FLIPPER_LEFT) {
-		arm = App->physics->CreateRectangle(x, y, arm_width, arm_height);
+		arm = App->physics->CreateRectangle(x, y, arm_width, arm_height, BOUNCER,BALL);
 	}
 
 	////Editing the def
