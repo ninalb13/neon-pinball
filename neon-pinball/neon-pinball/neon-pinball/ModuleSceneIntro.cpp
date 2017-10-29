@@ -12,6 +12,8 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	circle  = NULL;
 	ray_on = false;
 	tunnel_on = false;
+	win = false;
+	gameover = false;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -30,13 +32,14 @@ bool ModuleSceneIntro::Start()
 	Create_Limits();
 
 	Create_Bouncers();
-	App->physics->CreateCircle(100, 200, 10, b2_dynamicBody, 0.0f);
+
+	/*App->physics->CreateCircle(100, 200, 10, b2_dynamicBody, 0.0f);*/
 
 
-	App->physics->CreateCircle(100, 190, 10, b2_dynamicBody, 0.0f);
+	App->physics->CreateCircle(100, 190, 10, b2_dynamicBody, 0.0f, BALL, DEATH_SENSOR);
 
-
-
+	//death sensor
+	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15);
 
 	leftFlipper = App->physics->CreateFlipper(200,858,FLIPPER_LEFT); //HARDCODING
 	rightFlipper = App->physics->CreateFlipper(300,858,FLIPPER_RIGHT);
@@ -87,7 +90,7 @@ update_status ModuleSceneIntro::Update()
 
 
 		
-	//ball = App->physics->CreateCircle(490, 800, 15, "static", 0x0004, 0x0001);
+	ball = App->physics->CreateCircle(490, 800, 15, b2_dynamicBody, 0.1f, BALL, BOUNCER);
 
 	App->renderer->Blit(background, 0, 0);
 
@@ -101,6 +104,13 @@ update_status ModuleSceneIntro::Update()
 
 	fVector normal(0.0f, 0.0f);
 
+	//delete ball
+	if (delete_ball == true)
+	{
+		App->physics->DeleteBody(ball->body);
+		ball = nullptr;
+		delete_ball = false;
+	}
 	// All draw functions ------------------------------------------------------
 
 
@@ -128,12 +138,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		insideTunnel = !insideTunnel;
 	}
+	else if (bodyB == death_sensor)
+	{
+		if (!win)
+		{
+			gameover = true;
+			delete_ball = true;
+		}
+	}
 }
 
 void ModuleSceneIntro::Create_Limits()
 {
-
-	
 	//tunnels
 		//tunnel 1
 	//long chain
@@ -145,7 +161,7 @@ void ModuleSceneIntro::Create_Limits()
 		357, 357
 	};
 
-	tunnels_list.add(longchain = App->physics->CreateChain(0, 0, long_chain, 8, "static"));
+	tunnels_list.add(longchain = App->physics->CreateChain(0, 0, long_chain, 8, "static", BOUNCER,BALL));
 
 	// Pivot 0, 0
 	int long_chain_2[8] = {
@@ -155,7 +171,7 @@ void ModuleSceneIntro::Create_Limits()
 		371, 340
 	};
 
-	tunnels_list.add(longchain_2 = App->physics->CreateChain(0, 0, long_chain_2, 8, "static"));
+	tunnels_list.add(longchain_2 = App->physics->CreateChain(0, 0, long_chain_2, 8, "static", BOUNCER, BALL));
 
 	//upper_curve
 	// Pivot 0, 0
@@ -185,7 +201,7 @@ void ModuleSceneIntro::Create_Limits()
 		96, 225
 	};
 
-	uppercurve = App->physics->CreateChain(0, 0, upper_curve_outside, 46, "static");
+	uppercurve = App->physics->CreateChain(0, 0, upper_curve_outside, 46, "static", BOUNCER, BALL);
 
 	// Pivot 0, 0
 	int upper_curve_inside[36] = {
@@ -209,7 +225,7 @@ void ModuleSceneIntro::Create_Limits()
 		143, 181
 	};
 
-	uppercurve_2 = App->physics->CreateChain(0, 0, upper_curve_inside, 36, "static");
+	uppercurve_2 = App->physics->CreateChain(0, 0, upper_curve_inside, 36, "static", BOUNCER, BALL);
 
 	// Pivot 0, 0
 	int lower_curve_inside[20] = {
@@ -225,7 +241,7 @@ void ModuleSceneIntro::Create_Limits()
 		358, 393
 	};
 
-	lowercurve = App->physics->CreateChain(0, 0, lower_curve_inside, 20, "static");
+	lowercurve = App->physics->CreateChain(0, 0, lower_curve_inside, 20, "static", BOUNCER, BALL);
 
 	// Pivot 0, 0
 	int lower_curve_outside[32] = {
@@ -247,7 +263,7 @@ void ModuleSceneIntro::Create_Limits()
 		390, 410
 	};
 
-	lowercurve_2 = App->physics->CreateChain(0, 0, lower_curve_outside, 32, "static");
+	lowercurve_2 = App->physics->CreateChain(0, 0, lower_curve_outside, 32, "static", BOUNCER, BALL);
 	// Pivot 0, 0
 	// Pivot 0, 0
 	int Pinball[48] = {
@@ -278,7 +294,7 @@ void ModuleSceneIntro::Create_Limits()
 	};
 
 
-	background_.add(App->physics->CreateChain(0, 0, Pinball, 48, "static"));
+	background_.add(App->physics->CreateChain(0, 0, Pinball, 48, "static", BOUNCER, BALL));
 
 	//triangles
 	// Pivot 0, 0
@@ -288,7 +304,7 @@ void ModuleSceneIntro::Create_Limits()
 		189, 787
 	};
 
-	left_triangle = App->physics->CreateChain(0, 0, Triangleleft, 6, "static");
+	left_triangle = App->physics->CreateChain(0, 0, Triangleleft, 6, "static", BOUNCER, BALL);
 
 	// Pivot 0, 0
 	int Triangleright[6] = {
@@ -296,17 +312,17 @@ void ModuleSceneIntro::Create_Limits()
 		401, 730,
 		314, 785
 	};
-	right_triangle = App->physics->CreateChain(0, 0, Triangleright, 6, "static");
+	right_triangle = App->physics->CreateChain(0, 0, Triangleright, 6, "static", BOUNCER, BALL);
 }
 
 
 void ModuleSceneIntro::Create_Bouncers()
 {
-	bouncer_1 = App->physics->CreateCircle(253, 141, 23, b2_staticBody, 2.00f);
-	bouncer_2 = App->physics->CreateCircle(326, 176, 23, b2_staticBody, 2.00f);
-	bouncer_3 = App->physics->CreateCircle(155, 447, 23, b2_staticBody, 2.00f);
-	bouncer_4 = App->physics->CreateCircle(225, 490, 23, b2_staticBody, 2.00f);
-	bouncer_5 = App->physics->CreateCircle(303, 500, 23, b2_staticBody, 2.00f);
+	bouncer_1 = App->physics->CreateCircle(253, 141, 23, b2_staticBody, 2.00f, BOUNCER, BALL);
+	bouncer_2 = App->physics->CreateCircle(326, 176, 23, b2_staticBody, 2.00f, BOUNCER,BALL);
+	bouncer_3 = App->physics->CreateCircle(155, 447, 23, b2_staticBody, 2.00f, BOUNCER, BALL);
+	bouncer_4 = App->physics->CreateCircle(225, 490, 23, b2_staticBody, 2.00f, BOUNCER, BALL);
+	bouncer_5 = App->physics->CreateCircle(303, 500, 23, b2_staticBody, 2.00f, BOUNCER, BALL);
 }
 
 void ModuleSceneIntro::ControlTunnels()
@@ -327,16 +343,16 @@ void ModuleSceneIntro::ControlTunnels()
 	}
 }
 
-bool ModuleSceneIntro::Deactivate_Tunnel()
-{
-	return true;
-}
-void ModuleSceneIntro::Control_Tunnels()
-{
-	if (tunnel_on == false && tunnel_lower_sensor->body->IsActive() || tunnel_upper_sensor->body->IsActive())
-	{
-		tunnel_on = true;
-	}
-	else
-		tunnel_on = false;
-}
+//bool ModuleSceneIntro::Deactivate_Tunnel()
+//{
+//	return true;
+//}
+//void ModuleSceneIntro::Control_Tunnels()
+//{
+//	if (tunnel_on == false && tunnel_lower_sensor->body->IsActive() || tunnel_upper_sensor->body->IsActive())
+//	{
+//		tunnel_on = true;
+//	}
+//	else
+//		tunnel_on = false;
+//}

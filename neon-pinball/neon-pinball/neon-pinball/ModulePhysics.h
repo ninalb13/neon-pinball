@@ -14,6 +14,11 @@
 
 // Small class to return to other modules to track position and rotation of physics bodies
 enum FLIPPER_DIRECTION {FLIPPER_RIGHT, FLIPPER_LEFT};
+enum COLLISION_TYPE{ 
+	BALL = 0x0001,
+	DEATH_SENSOR = 0x0002,
+	TUNNEL_SENSOR = 0x0003,
+	BOUNCER = 0x0004};
 class PhysBody
 {
 public:
@@ -43,10 +48,10 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, float restitution);
+	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, float restitution,uint16 category, uint16 mask);
 	PhysBody* CreateRectangle(int x, int y, int width, int height);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
-	PhysBody* CreateChain(int x, int y, int* points, int size, const char* type);
+	PhysBody* CreateChain(int x, int y, int* points, int size, const char* type, uint16 category, uint16 mask);
 	void CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A, PhysBody* B);
 	PhysBody* CreatePolygon(int x, int y, int* points, int size, float density, uint16 category, uint16 mask);  //Cal revisar-lo
 	b2RevoluteJoint* CreateFlipper(int x, int y, FLIPPER_DIRECTION direction);
@@ -66,7 +71,7 @@ public:
 
 	bool mouse_cliked = false;
 
-
+	bool DeleteBody(b2Body* body);
 private:
 
 	bool debug;

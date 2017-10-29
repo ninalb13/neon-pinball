@@ -58,7 +58,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type, float restitution)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type, float restitution, uint16 category, uint16 mask)
 {
 	b2BodyDef body;
 
@@ -72,7 +72,9 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type,
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
-	fixture.restitution = restitution; 
+	fixture.restitution = restitution;
+	fixture.filter.categoryBits = category;
+	fixture.filter.maskBits = mask;
 
 	b->CreateFixture(&fixture);
 
@@ -136,7 +138,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, const char* type)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, const char* type, uint16 category, uint16 mask)
 {
 	b2BodyDef body;
 
@@ -162,6 +164,8 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, const 
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
+	fixture.filter.categoryBits = category;
+	fixture.filter.maskBits = mask;
 	b->CreateFixture(&fixture);
 
 	delete p;
@@ -187,7 +191,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION di
 	int arm_width = 45;
 	int arm_height = 7;
 	
-	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/100, b2_staticBody, 0.0f); //Super small pivot
+	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/100, b2_staticBody, 0.0f,BALL,BALL); //Super small pivot
 	PhysBody* arm = nullptr;
 
 	int reference_angle = 0; 
@@ -456,4 +460,16 @@ void ModulePhysics::getMousePositionInMeters(int* mouse_x, int* mouse_y)
 	SDL_GetMouseState(mouse_x, mouse_y);
 	mouse_position.x = PIXEL_TO_METERS(*mouse_x);
 	mouse_position.y = PIXEL_TO_METERS(*mouse_y);
+}
+
+bool ModulePhysics::DeleteBody(b2Body* body)
+{
+	if (body != NULL) 
+	{
+		world->DestroyBody(body);
+		body->SetUserData(NULL);
+		body = NULL;
+	}
+
+	return true;
 }
