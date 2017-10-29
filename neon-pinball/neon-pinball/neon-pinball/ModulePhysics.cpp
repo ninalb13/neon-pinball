@@ -119,7 +119,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height, uint16 category, uint16 mask)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -134,6 +134,8 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	fixture.shape = &box;
 	fixture.density = 1.0f;
 	fixture.isSensor = true;
+	fixture.filter.categoryBits = category;
+	fixture.filter.maskBits = mask;
 
 	b->CreateFixture(&fixture);
 

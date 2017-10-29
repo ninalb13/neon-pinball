@@ -39,15 +39,15 @@ bool ModuleSceneIntro::Start()
 
 
 	//death sensor
-	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15);
+	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15, BOUNCER, BALL);
 
 	leftFlipper = App->physics->CreateFlipper(200,858,FLIPPER_LEFT); //HARDCODING
 	rightFlipper = App->physics->CreateFlipper(300,858,FLIPPER_RIGHT);
 
 	//sensors for the tunnels
 
-	tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6);
-	tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9);
+	tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6, BOUNCER, BALL);
+	tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9, BOUNCER, BALL);
 
 	//First desactivate all tunnels
 	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
@@ -134,6 +134,7 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
+	if(bodyB == death_sensor)
 	LOG("HELLO");
 }
 
