@@ -38,8 +38,8 @@ bool ModuleSceneIntro::Start()
 	//death sensor
 	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15, BOUNCER, BALL);
 
-	leftFlipper = App->physics->CreateFlipper(200, 858, FLIPPER_LEFT); //HARDCODING
-	rightFlipper = App->physics->CreateFlipper(300, 858, FLIPPER_RIGHT);
+	leftFlipper = App->physics->CreateFlipper(200, 858, LEFT); //HARDCODING
+	rightFlipper = App->physics->CreateFlipper(300, 858, RIGHT);
 
 	//sensors for the tunnels
 
@@ -69,15 +69,6 @@ update_status ModuleSceneIntro::Update()
 {
 	ControlTunnels();
 
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		SpawnBall(1);
-	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		ray_on = !ray_on;
@@ -87,7 +78,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {
 		if (game_state == WAITING) {
-			SpawnBall(0);
+			SpawnBall(LEFT);
 			game_state = PLAYING;
 		}
 		leftFlipper->SetMotorSpeed(flipperSpeed);
@@ -97,7 +88,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
 		if (game_state == WAITING) {
-			SpawnBall(1);
+			SpawnBall(RIGHT);
 			game_state = PLAYING;
 		}
 		rightFlipper->SetMotorSpeed(-flipperSpeed);
@@ -368,19 +359,19 @@ void ModuleSceneIntro::ControlTunnels()
 }
 
 
-void ModuleSceneIntro::SpawnBall(int direction)
+void ModuleSceneIntro::SpawnBall(DIRECTION direction)
 {
 	int spawn_x = 250;
 	int spawn_y = 580;
 	bool wake = true;
 	ball = App->physics->CreateBall(spawn_x, spawn_y, 10, 0.0f, this);
-	if (direction == 1)
+	if (direction == RIGHT)
 	{
 		b2Vec2 impulse_right(1.0f, 0.0f);
 		b2Vec2 impulse_right_y(0.0f, 1.5f);
 		ball->body->ApplyLinearImpulse(impulse_right, impulse_right_y, wake);
 	}
-	else
+	else if(direction == LEFT)
 	{
 		b2Vec2 impulse_left(-1.0f, 0.0f);
 		b2Vec2 impulse_left_y(0.0f, 1.5f);

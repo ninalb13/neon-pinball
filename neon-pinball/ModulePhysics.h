@@ -13,7 +13,7 @@
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
 // Small class to return to other modules to track position and rotation of physics bodies
-enum FLIPPER_DIRECTION {FLIPPER_RIGHT, FLIPPER_LEFT};
+enum DIRECTION {RIGHT, LEFT};
 enum COLLISION_TYPE{ 
 	BALL = 0x0001,
 	DEATH_SENSOR = 0x0002,
@@ -56,7 +56,7 @@ public:
 	PhysBody* CreateChain(int x, int y, int* points, int size, const char* type, uint16 category, uint16 mask);
 	void CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A, PhysBody* B);
 	PhysBody* CreatePolygon(int x, int y, int* points, int size, float density, uint16 category, uint16 mask);  //Cal revisar-lo
-	b2RevoluteJoint* CreateFlipper(int x, int y, FLIPPER_DIRECTION direction);
+	b2RevoluteJoint* CreateFlipper(int x, int y, DIRECTION direction);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

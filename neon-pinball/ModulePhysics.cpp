@@ -205,7 +205,7 @@ void ModulePhysics::CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A
 	def->collideConnected = false;
 }
 
-b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION direction)
+b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, DIRECTION direction)
 {
 	b2RevoluteJointDef def;
 
@@ -219,7 +219,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION di
 	int upper_angle = 20;
 	int lower_angle = -20;
 
-	if (direction == FLIPPER_RIGHT) {
+	if (direction == RIGHT) {
 		reference_angle += 180;
 		arm = App->physics->CreateRectangle(x-arm_width, y, arm_width, arm_height, BOUNCER,BALL);
 		//int temp_angle = upper_angle; //To swap angles
@@ -227,7 +227,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, FLIPPER_DIRECTION di
 		//lower_angle = temp_angle;
 
 	}
-	else if (direction == FLIPPER_LEFT) {
+	else if (direction == LEFT) {
 		arm = App->physics->CreateRectangle(x, y, arm_width, arm_height, BOUNCER,BALL);
 	}
 
