@@ -83,7 +83,15 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type,
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = radius;
 
+
 	return pbody;
+}
+
+PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution, Module * lisener)
+{
+	PhysBody* ball = CreateCircle(x, y, radius, b2_dynamicBody, restitution, BALL, BOUNCER);
+	ball->listener = lisener;
+	return nullptr;
 }
 
 PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)

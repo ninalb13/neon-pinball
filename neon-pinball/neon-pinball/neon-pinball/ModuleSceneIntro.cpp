@@ -35,8 +35,9 @@ bool ModuleSceneIntro::Start()
 	/*App->physics->CreateCircle(100, 200, 10, b2_dynamicBody, 0.0f);*/
 
 
-	ball = App->physics->CreateCircle(100, 190, 10, b2_dynamicBody, 0.0f, BALL, BOUNCER);
-	ball->listener = this;
+	ball = App->physics->CreateBall(100, 190, 10, 0.0f, this);
+
+
 	//death sensor
 	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15);
 
