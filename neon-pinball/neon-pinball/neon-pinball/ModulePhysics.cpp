@@ -94,8 +94,12 @@ PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution
 	return nullptr;
 }
 
-PhysBody* ModulePhysics::CreateBouncer(int x, int y, int radius, float restitution, uint16 category, uint16 mask)
+PhysBody* ModulePhysics::CreateBouncer(int x, int y)
 {
+	float restitution = 1.5f;
+	uint16 category = BOUNCER;
+	uint16 mask = BALL;
+	int radius = 23;
 	PhysBody* bouncer = CreateCircle(x, y, radius, b2_staticBody, restitution, BOUNCER, BALL);
 	return nullptr;
 }
