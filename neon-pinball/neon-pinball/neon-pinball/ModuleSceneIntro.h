@@ -26,7 +26,7 @@ public:
 	void ControlTunnels();
 
 	
-	void SpawnBall();
+	void SpawnBall(int direction);
 
 public:
 

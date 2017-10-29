@@ -68,7 +68,12 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		SpawnBall();
+		SpawnBall(0);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		SpawnBall(1);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -349,15 +354,23 @@ void ModuleSceneIntro::ControlTunnels()
 }
 
 
-void ModuleSceneIntro::SpawnBall()
+void ModuleSceneIntro::SpawnBall(int direction)
 {
 	int spawn_x = 250;
 	int spawn_y = 580;
-	b2Vec2 impulse_right(1.0f, 0.0f);
-	b2Vec2 impulse_right_y(0.0f, 1.5f);
-	bool right = true;
-	
+	bool wake = true;
 	ball = App->physics->CreateBall(spawn_x, spawn_y, 10, 0.0f, this);
+	if (direction == 1)
+	{
+		b2Vec2 impulse_right(1.0f, 0.0f);
+		b2Vec2 impulse_right_y(0.0f, 1.5f);
+		ball->body->ApplyLinearImpulse(impulse_right, impulse_right_y, wake);
+	}
+	else
+	{
+		b2Vec2 impulse_left(-1.0f, 0.0f);
+		b2Vec2 impulse_left_y(0.0f, 1.5f);
+		ball->body->ApplyLinearImpulse(impulse_left, impulse_left_y, wake);
+	}
 
-	ball->body->ApplyLinearImpulse(impulse_right, impulse_right_y, right);
 }
