@@ -15,6 +15,8 @@ public:
 
 	bool Start();
 	update_status Update();
+	void DrawEverything();
+
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void Create_Limits();
@@ -22,8 +24,10 @@ public:
 	void Create_Bouncers();
 
 	void ControlTunnels();
+
 	
 	void SpawnBall();
+
 public:
 
 	bool delete_ball;

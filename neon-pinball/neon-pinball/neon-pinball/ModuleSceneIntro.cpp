@@ -111,8 +111,6 @@ update_status ModuleSceneIntro::Update()
 	//	delete_ball = false;
 	//}
 	// All draw functions ------------------------------------------------------
-
-
 	
 
 	// ray -----------------
@@ -128,7 +126,22 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
+	DrawEverything();
+
 	return UPDATE_CONTINUE;
+}
+
+void ModuleSceneIntro::DrawEverything()
+{
+	// All draw functions ------------------------------------------------------
+	int x = 0;
+	int y = 0;
+
+	//Ball
+	//ball->GetPosition(x, y);
+	//App->renderer->Blit(circle, x, y, NULL, 1.0f, ball->GetRotation());
+
+
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
@@ -334,6 +347,7 @@ void ModuleSceneIntro::ControlTunnels()
 		}
 	}
 }
+
 
 void ModuleSceneIntro::SpawnBall()
 {
