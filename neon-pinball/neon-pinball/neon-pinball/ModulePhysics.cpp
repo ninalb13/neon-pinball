@@ -87,10 +87,10 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type,
 	return pbody;
 }
 
-PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution, Module * lisener)
+PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution, Module * listener)
 {
 	PhysBody* ball = CreateCircle(x, y, radius, b2_dynamicBody, restitution, BALL, BOUNCER);
-	ball->listener = lisener;
+	ball->listener = listener;
 	return nullptr;
 }
 
