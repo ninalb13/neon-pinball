@@ -28,7 +28,7 @@ public:
 	bool Deactivate_Tunnel();
 public:
 
-
+	float restitution = 1.50f;
 	bool delete_ball;
 	PhysBody* death_sensor;
 

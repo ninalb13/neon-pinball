@@ -49,7 +49,8 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, float restitution,uint16 category, uint16 mask);
-	PhysBody* CreateBall(int x, int y, int radius, float restitution, Module* lisener);
+	PhysBody* CreateBall(int x, int y, int radius, float restitution, Module* listener);
+	PhysBody* CreateBouncer(int x, int y, int radius, float restitution, uint16 category, uint16 mask);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, uint16 category, uint16 mask);
 	PhysBody* CreateChain(int x, int y, int* points, int size, const char* type, uint16 category, uint16 mask);

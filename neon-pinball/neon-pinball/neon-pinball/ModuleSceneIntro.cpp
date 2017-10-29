@@ -311,11 +311,11 @@ void ModuleSceneIntro::Create_Limits()
 
 void ModuleSceneIntro::Create_Bouncers()
 {
-	bouncer_1 = App->physics->CreateCircle(253, 141, 23, b2_staticBody, 2.00f, BOUNCER, BALL);
-	bouncer_2 = App->physics->CreateCircle(326, 176, 23, b2_staticBody, 2.00f, BOUNCER,BALL);
-	bouncer_3 = App->physics->CreateCircle(155, 447, 23, b2_staticBody, 2.00f, BOUNCER, BALL);
-	bouncer_4 = App->physics->CreateCircle(225, 490, 23, b2_staticBody, 2.00f, BOUNCER, BALL);
-	bouncer_5 = App->physics->CreateCircle(303, 500, 23, b2_staticBody, 2.00f, BOUNCER, BALL);
+	bouncer_1 = App->physics->CreateBouncer(253, 141, 23, restitution, BOUNCER, BALL);
+	bouncer_2 = App->physics->CreateBouncer(326, 176, 23, restitution, BOUNCER,BALL);
+	bouncer_3 = App->physics->CreateBouncer(155, 447, 23, restitution, BOUNCER, BALL);
+	bouncer_4 = App->physics->CreateBouncer(225, 490, 23, restitution, BOUNCER, BALL);
+	bouncer_5 = App->physics->CreateBouncer(303, 500, 23, restitution, BOUNCER, BALL);
 }
 
 void ModuleSceneIntro::ControlTunnels()
