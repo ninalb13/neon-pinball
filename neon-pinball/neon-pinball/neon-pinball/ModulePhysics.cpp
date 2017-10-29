@@ -91,7 +91,7 @@ PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution
 {
 	PhysBody* ball = CreateCircle(x, y, radius, b2_dynamicBody, restitution, BALL, BOUNCER);
 	ball->listener = listener;
-	return nullptr;
+	return ball;
 }
 
 PhysBody* ModulePhysics::CreateBouncer(int x, int y)

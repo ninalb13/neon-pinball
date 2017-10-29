@@ -29,13 +29,7 @@ bool ModuleSceneIntro::Start()
 	background = App->textures->Load("pinball/Pinball.png");
 
 	Create_Limits();
-
 	Create_Bouncers();
-
-	/*App->physics->CreateCircle(100, 200, 10, b2_dynamicBody, 0.0f);*/
-
-
-	ball = App->physics->CreateBall(100, 190, 10, 0.0f, this);
 
 
 	//death sensor
@@ -71,6 +65,11 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	ControlTunnels();
+
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		SpawnBall();
+	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		ray_on = !ray_on;
@@ -336,16 +335,15 @@ void ModuleSceneIntro::ControlTunnels()
 	}
 }
 
-//bool ModuleSceneIntro::Deactivate_Tunnel()
-//{
-//	return true;
-//}
-//void ModuleSceneIntro::Control_Tunnels()
-//{
-//	if (tunnel_on == false && tunnel_lower_sensor->body->IsActive() || tunnel_upper_sensor->body->IsActive())
-//	{
-//		tunnel_on = true;
-//	}
-//	else
-//		tunnel_on = false;
-//}
+void ModuleSceneIntro::SpawnBall()
+{
+	int spawn_x = 250;
+	int spawn_y = 580;
+	b2Vec2 impulse_right(1.0f, 0.0f);
+	b2Vec2 impulse_right_y(0.0f, 1.5f);
+	bool right = true;
+	
+	ball = App->physics->CreateBall(spawn_x, spawn_y, 10, 0.0f, this);
+
+	ball->body->ApplyLinearImpulse(impulse_right, impulse_right_y, right);
+}

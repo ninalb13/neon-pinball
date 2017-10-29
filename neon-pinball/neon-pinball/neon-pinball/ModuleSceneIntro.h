@@ -22,10 +22,8 @@ public:
 	void Create_Bouncers();
 
 	void ControlTunnels();
-
-	void Control_Tunnels();
-
-	bool Deactivate_Tunnel();
+	
+	void SpawnBall();
 public:
 
 	bool delete_ball;
