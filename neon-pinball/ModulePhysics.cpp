@@ -94,19 +94,29 @@ PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution
 	return ball;
 }
 
-PhysBody* ModulePhysics::CreateBouncer(int x, int y)
+PhysBody* ModulePhysics::CreateCircleBouncer(int x, int y)
 {
 	float restitution = 1.5f;
 	uint16 category = BOUNCER;
 	uint16 mask = BALL;
 	int radius = 23;
 	PhysBody* bouncer = CreateCircle(x, y, radius, b2_staticBody, restitution, BOUNCER, BALL);
-	return nullptr;
+	return bouncer;
 }
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask)
+
+PhysBody* ModulePhysics::CreateRectangleBouncer(int x, int y, int width, int height)
+{
+	uint16 category = BOUNCER;
+	uint16 mask = BALL;
+	float restitution = 0.75f;
+	PhysBody* bouncer = CreateRectangle(x,y,width,height,BOUNCER,BALL,restitution, b2_staticBody);
+	
+	return bouncer;
+}
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask, float restitution = 0, b2BodyType type = b2_dynamicBody)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -118,6 +128,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, ui
 	fixture.density = 1.0f;
 	fixture.filter.categoryBits = category;
 	fixture.filter.maskBits = mask;
+	fixture.restitution = restitution;
 
 	b->CreateFixture(&fixture);
 

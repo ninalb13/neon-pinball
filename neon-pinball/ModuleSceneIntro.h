@@ -35,6 +35,7 @@ public:
 
 	Game_states game_state = WAITING;
 
+	PhysBody* rectangle;
 	//tunnels_sensors
 	bool tunnel_on;
 	PhysBody* tunnel_upper_sensor;

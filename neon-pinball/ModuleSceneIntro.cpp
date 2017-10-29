@@ -34,6 +34,7 @@ bool ModuleSceneIntro::Start()
 	Create_Limits();
 	Create_Bouncers();
 
+	rectangle = App->physics->CreateRectangleBouncer(200, 750, 805, 10);
 
 	//death sensor
 	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15, BOUNCER, BALL);
@@ -333,11 +334,11 @@ void ModuleSceneIntro::Create_Limits()
 
 void ModuleSceneIntro::Create_Bouncers()
 {
-	bouncer_1 = App->physics->CreateBouncer(253, 141);
-	bouncer_2 = App->physics->CreateBouncer(326, 176);
-	bouncer_3 = App->physics->CreateBouncer(155, 447);
-	bouncer_4 = App->physics->CreateBouncer(225, 490);
-	bouncer_5 = App->physics->CreateBouncer(303, 500);
+	bouncer_1 = App->physics->CreateCircleBouncer(253, 141);
+	bouncer_2 = App->physics->CreateCircleBouncer(326, 176);
+	bouncer_3 = App->physics->CreateCircleBouncer(155, 447);
+	bouncer_4 = App->physics->CreateCircleBouncer(225, 490);
+	bouncer_5 = App->physics->CreateCircleBouncer(303, 500);
 }
 
 void ModuleSceneIntro::ControlTunnels()

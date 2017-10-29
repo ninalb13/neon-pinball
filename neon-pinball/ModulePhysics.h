@@ -50,8 +50,9 @@ public:
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, float restitution,uint16 category, uint16 mask);
 	PhysBody* CreateBall(int x, int y, int radius, float restitution, Module* listener);
-	PhysBody* CreateBouncer(int x, int y);
-	PhysBody* CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask);
+	PhysBody* CreateCircleBouncer(int x, int y);
+	PhysBody* CreateRectangleBouncer(int x, int y, int width, int height);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask,float restitution, b2BodyType type);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, uint16 category, uint16 mask);
 	PhysBody* CreateChain(int x, int y, int* points, int size, const char* type, uint16 category, uint16 mask);
 	void CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A, PhysBody* B);
