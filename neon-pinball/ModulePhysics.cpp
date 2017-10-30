@@ -96,7 +96,7 @@ PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution
 
 PhysBody* ModulePhysics::CreateCircleBouncer(int x, int y)
 {
-	float restitution = 1.5f;
+	float restitution = 0.5f;
 	uint16 category = BOUNCER;
 	uint16 mask = BALL;
 	int radius = 23;
@@ -104,16 +104,16 @@ PhysBody* ModulePhysics::CreateCircleBouncer(int x, int y)
 	return bouncer;
 }
 
-PhysBody* ModulePhysics::CreateRectangleBouncer(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangleBouncer(int x, int y, int width, int height, float angle)
 {
 	uint16 category = BOUNCER;
 	uint16 mask = BALL;
 	float restitution = 0.75f;
-	PhysBody* bouncer = CreateRectangle(x,y,width,height,BOUNCER,BALL,restitution, b2_staticBody);
+	PhysBody* bouncer = CreateRectangle(x,y,width,height,BOUNCER,BALL,restitution, b2_staticBody, angle);
 	
 	return bouncer;
 }
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask, float restitution = 0, b2BodyType type = b2_dynamicBody)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask, float restitution = 0, b2BodyType type = b2_dynamicBody, float angle)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -130,6 +130,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, ui
 	fixture.filter.maskBits = mask;
 	fixture.restitution = restitution;
 
+
 	b->CreateFixture(&fixture);
 
 	PhysBody* pbody = new PhysBody();
@@ -137,6 +138,10 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, ui
 	b->SetUserData(pbody);
 	pbody->width = width * 0.5f;
 	pbody->height = height * 0.5f;
+
+	if (angle != 420) //This particular angle is the default and if it is 420 the angle won't change
+		b->SetTransform(b->GetPosition(), angle); //1.092173048f
+	
 
 	return pbody;
 }

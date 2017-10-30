@@ -34,7 +34,10 @@ bool ModuleSceneIntro::Start()
 	Create_Limits();
 	Create_Bouncers();
 
-	rectangle = App->physics->CreateRectangleBouncer(200, 750, 805, 10);
+	//Rectangle bouncers
+	float rect_bouncer_angle = 1.07973048f;
+	left_rectangle_bouncer = App->physics->CreateRectangleBouncer(145, 700, 180, 1, rect_bouncer_angle);
+	right_rectangle_bouncer = App->physics->CreateRectangleBouncer(357, 700, 180, 1, -rect_bouncer_angle);
 
 	//death sensor
 	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15, BOUNCER, BALL);
@@ -149,7 +152,7 @@ void ModuleSceneIntro::DrawEverything()
 	//Ball
 	if (game_state == PLAYING) {
 		ball->GetPosition(x, y);
-		App->renderer->Blit(circle, x, y, NULL, 1.0f, ball->GetRotation());
+		App->renderer->Blit(circle, x, y, NULL, 1.0f);
 	}
 
 
