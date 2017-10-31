@@ -81,13 +81,12 @@ update_status ModuleSceneIntro::Update()
 
 	App->renderer->Blit(background, 0, 0);
 
-	DoRicksCode();
-
 	DrawEverything();
 
 	CheckForInput();
 
-	
+	DoRicksCode();
+
 	return UPDATE_CONTINUE;
 }
 
@@ -109,7 +108,8 @@ void ModuleSceneIntro::DrawEverything()
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	if (bodyB == death_sensor) {
-		game_state = WAITING;
+		game_state = WAITING_KEY_UP;
+		delete_ball = true;
 	}
 
 	if (bodyB == tunnel_lower_sensor || bodyB == tunnel_upper_sensor) {
@@ -127,12 +127,143 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 }
 
+void ModuleSceneIntro::Create_Bouncers()
+{
+	bouncer_1 = App->physics->CreateCircleBouncer(253, 141);
+	bouncer_2 = App->physics->CreateCircleBouncer(326, 176);
+	bouncer_3 = App->physics->CreateCircleBouncer(155, 447);
+	bouncer_4 = App->physics->CreateCircleBouncer(225, 490);
+	bouncer_5 = App->physics->CreateCircleBouncer(303, 500);
+}
+
+void ModuleSceneIntro::ControlTunnels()
+{
+	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
+
+	if (insideTunnel) {
+		while (tunnels_iterator) {
+			tunnels_iterator->data->body->SetActive(true);
+			tunnels_iterator = tunnels_iterator->next;
+		}
+	}
+	else {
+		while (tunnels_iterator) {
+			tunnels_iterator->data->body->SetActive(false);
+			tunnels_iterator = tunnels_iterator->next;
+		}
+	}
+}
+
+void ModuleSceneIntro::CheckForInput()
+{
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		ray_on = !ray_on;
+		ray.x = App->input->GetMouseX();
+		ray.y = App->input->GetMouseY();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {
+		if (game_state == WAITING) {
+			SpawnBall(LEFT);
+			game_state = PLAYING;
+		}
+		leftFlipper->EnableMotor(true);
+	}
+	else {
+		leftFlipper->EnableMotor(false);
+	}
+
+
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
+		if (game_state == WAITING) {
+			SpawnBall(RIGHT);
+			game_state = PLAYING;
+		}
+		rightFlipper->EnableMotor(true);
+	}
+	else {
+		rightFlipper->EnableMotor(false);
+	}
+
+	if (game_state == WAITING_KEY_UP) {
+		if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_Z)) {
+			if (App->input->GetKey(SDL_SCANCODE_M) == KEY_UP)
+			{
+				if (game_state == WAITING_KEY_UP)
+					game_state = WAITING;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_UP)
+			{
+				if (game_state == WAITING_KEY_UP)
+					game_state = WAITING;
+			}
+		}
+		else {
+			game_state = WAITING;
+		}
+	}
+}
+
+void ModuleSceneIntro::DoRicksCode()
+{
+	iPoint mouse;
+	mouse.x = App->input->GetMouseX();
+	mouse.y = App->input->GetMouseY();
+	int ray_hit = ray.DistanceTo(mouse);
+
+	fVector normal(0.0f, 0.0f);
+
+	//delete ball
+	if (delete_ball == true)
+	{
+		App->physics->DeleteBody(ball->body);
+		ball = nullptr;
+		delete_ball = false;
+	}
+
+	// ray -----------------
+	if (ray_on == true)
+	{
+		fVector destination(mouse.x - ray.x, mouse.y - ray.y);
+		destination.Normalize();
+		destination *= ray_hit;
+
+		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
+
+		if (normal.x != 0.0f)
+			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
+	}
+}
+
+
+void ModuleSceneIntro::SpawnBall(DIRECTION direction)
+{
+	int spawn_x = 250;
+	int spawn_y = 580;
+	bool wake = true;
+	ball = App->physics->CreateBall(spawn_x, spawn_y, 10, 0.0f, this);
+	if (direction == RIGHT)
+	{
+		b2Vec2 impulse_right(1.0f, 0.0f);
+		b2Vec2 impulse_right_y(0.0f, 1.5f);
+		ball->body->ApplyLinearImpulse(impulse_right, impulse_right_y, wake);
+	}
+	else if (direction == LEFT)
+	{
+		b2Vec2 impulse_left(-1.0f, 0.0f);
+		b2Vec2 impulse_left_y(0.0f, 1.5f);
+		ball->body->ApplyLinearImpulse(impulse_left, impulse_left_y, wake);
+	}
+
+}
+
 void ModuleSceneIntro::Create_Limits()
 {
 	//tunnels
-		//tunnel 1
+	//tunnel 1
 	//long chain
-		// Pivot 0, 0
+	// Pivot 0, 0
 	int long_chain[8] = {
 		351, 366,
 		93, 237,
@@ -292,115 +423,4 @@ void ModuleSceneIntro::Create_Limits()
 		314, 785
 	};
 	right_triangle = App->physics->CreateChain(0, 0, Triangleright, 6, "static", BOUNCER, BALL);
-}
-
-
-void ModuleSceneIntro::Create_Bouncers()
-{
-	bouncer_1 = App->physics->CreateCircleBouncer(253, 141);
-	bouncer_2 = App->physics->CreateCircleBouncer(326, 176);
-	bouncer_3 = App->physics->CreateCircleBouncer(155, 447);
-	bouncer_4 = App->physics->CreateCircleBouncer(225, 490);
-	bouncer_5 = App->physics->CreateCircleBouncer(303, 500);
-}
-
-void ModuleSceneIntro::ControlTunnels()
-{
-	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
-
-	if (insideTunnel) {
-		while (tunnels_iterator) {
-			tunnels_iterator->data->body->SetActive(true);
-			tunnels_iterator = tunnels_iterator->next;
-		}
-	}
-	else {
-		while (tunnels_iterator) {
-			tunnels_iterator->data->body->SetActive(false);
-			tunnels_iterator = tunnels_iterator->next;
-		}
-	}
-}
-
-void ModuleSceneIntro::CheckForInput()
-{
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		ray_on = !ray_on;
-		ray.x = App->input->GetMouseX();
-		ray.y = App->input->GetMouseY();
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {
-		if (game_state == WAITING) {
-			SpawnBall(LEFT);
-			game_state = PLAYING;
-		}
-		leftFlipper->EnableMotor(true);
-	}
-	else
-		leftFlipper->EnableMotor(false);
-
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
-		if (game_state == WAITING) {
-			SpawnBall(RIGHT);
-			game_state = PLAYING;
-		}
-		rightFlipper->EnableMotor(true);
-	}
-	else
-		rightFlipper->EnableMotor(false);
-}
-
-void ModuleSceneIntro::DoRicksCode()
-{
-	iPoint mouse;
-	mouse.x = App->input->GetMouseX();
-	mouse.y = App->input->GetMouseY();
-	int ray_hit = ray.DistanceTo(mouse);
-
-	fVector normal(0.0f, 0.0f);
-
-	//delete ball
-	//if (delete_ball == true)
-	//{
-	//	App->physics->DeleteBody(ball->body);
-	//	ball = nullptr;
-	//	delete_ball = false;
-	//}
-
-	// ray -----------------
-	if (ray_on == true)
-	{
-		fVector destination(mouse.x - ray.x, mouse.y - ray.y);
-		destination.Normalize();
-		destination *= ray_hit;
-
-		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
-
-		if (normal.x != 0.0f)
-			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
-	}
-}
-
-
-void ModuleSceneIntro::SpawnBall(DIRECTION direction)
-{
-	int spawn_x = 250;
-	int spawn_y = 580;
-	bool wake = true;
-	ball = App->physics->CreateBall(spawn_x, spawn_y, 10, 0.0f, this);
-	if (direction == RIGHT)
-	{
-		b2Vec2 impulse_right(1.0f, 0.0f);
-		b2Vec2 impulse_right_y(0.0f, 1.5f);
-		ball->body->ApplyLinearImpulse(impulse_right, impulse_right_y, wake);
-	}
-	else if(direction == LEFT)
-	{
-		b2Vec2 impulse_left(-1.0f, 0.0f);
-		b2Vec2 impulse_left_y(0.0f, 1.5f);
-		ball->body->ApplyLinearImpulse(impulse_left, impulse_left_y, wake);
-	}
-
 }

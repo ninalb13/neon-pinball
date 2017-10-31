@@ -4,7 +4,7 @@
 #include "p2Point.h"
 #include "Globals.h"
 #include "ModulePhysics.h"
-enum Game_states { PLAYING, WAITING, FINISHED };
+enum Game_states { PLAYING, WAITING, WAITING_KEY_UP, FINISHED };
 class PhysBody;
 
 class ModuleSceneIntro : public Module
