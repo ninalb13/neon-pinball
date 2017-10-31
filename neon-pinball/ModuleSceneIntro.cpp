@@ -134,6 +134,12 @@ void ModuleSceneIntro::Create_Bouncers()
 	bouncer_3 = App->physics->CreateCircleBouncer(155, 447);
 	bouncer_4 = App->physics->CreateCircleBouncer(225, 490);
 	bouncer_5 = App->physics->CreateCircleBouncer(303, 500);
+
+	bouncers.add(bouncer_1);
+	bouncers.add(bouncer_2);
+	bouncers.add(bouncer_3);
+	bouncers.add(bouncer_4);
+	bouncers.add(bouncer_5);
 }
 
 void ModuleSceneIntro::ControlTunnels()
@@ -156,13 +162,15 @@ void ModuleSceneIntro::ControlTunnels()
 
 void ModuleSceneIntro::CheckForInput()
 {
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		ray_on = !ray_on;
-		ray.x = App->input->GetMouseX();
-		ray.y = App->input->GetMouseY();
-	}
+	//if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	//{
+	//	ray_on = !ray_on;
+	//	ray.x = App->input->GetMouseX();
+	//	ray.y = App->input->GetMouseY();
+	//}
 
+
+	//Flippers
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {
 		if (game_state == WAITING) {
 			SpawnBall(LEFT);
@@ -202,6 +210,13 @@ void ModuleSceneIntro::CheckForInput()
 		else {
 			game_state = WAITING;
 		}
+	}
+
+
+	//Switch
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		SwitchColliders();
 	}
 }
 
@@ -423,4 +438,14 @@ void ModuleSceneIntro::Create_Limits()
 		314, 785
 	};
 	right_triangle = App->physics->CreateChain(0, 0, Triangleright, 6, "static", BOUNCER, BALL);
+}
+
+void ModuleSceneIntro::SwitchColliders()
+{
+	p2List_item<PhysBody*>* bouncers_iterator = nullptr;
+
+
+	for (bouncers_iterator = bouncers.getFirst(); bouncers_iterator; bouncers_iterator = bouncers_iterator->next) {
+		bouncers_iterator->data->body->SetActive(!bouncers_iterator->data->body->IsActive());
+	}
 }

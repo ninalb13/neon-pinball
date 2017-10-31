@@ -21,6 +21,8 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void Create_Limits();
 
+	void SwitchColliders();
+
 	void Create_Bouncers();
 
 	void ControlTunnels();
@@ -73,6 +75,7 @@ public:
 	b2RevoluteJoint*  rightFlipper;
 
 	//Bouncers
+	p2List<PhysBody*> bouncers;
 	PhysBody* bouncer_1;
 	PhysBody* bouncer_2;
 	PhysBody* bouncer_3;
