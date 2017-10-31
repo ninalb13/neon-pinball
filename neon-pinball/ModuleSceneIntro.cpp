@@ -53,6 +53,9 @@ bool ModuleSceneIntro::Start()
 	tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6, BOUNCER, BALL);
 	tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9, BOUNCER, BALL);
 
+	//circular sensor
+	sensor_test = App->physics->CreateCircularSensor(80, 700, 7, BOUNCER, BALL);
+
 	//First desactivate all tunnels
 	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
 	while (tunnels_iterator) {
@@ -110,6 +113,11 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyB == death_sensor) {
 		game_state = WAITING_KEY_UP;
 		delete_ball = true;
+	}
+
+	if (bodyB == sensor_test)
+	{
+		App->player->score += 300;
 	}
 
 	if (bodyB == tunnel_lower_sensor || bodyB == tunnel_upper_sensor) {
