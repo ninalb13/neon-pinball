@@ -113,7 +113,7 @@ PhysBody* ModulePhysics::CreateRectangleBouncer(int x, int y, int width, int hei
 	
 	return bouncer;
 }
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask, float restitution = 0, b2BodyType type = b2_dynamicBody, float angle)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask, float restitution = 0, b2BodyType type = b2_dynamicBody, float angle, float density)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -125,7 +125,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, ui
 
 	b2FixtureDef fixture;
 	fixture.shape = &box;
-	fixture.density = 1.0f;
+	fixture.density = density;
 	fixture.filter.categoryBits = category;
 	fixture.filter.maskBits = mask;
 	fixture.restitution = restitution;
@@ -235,16 +235,14 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, DIRECTION direction)
 	int upper_angle = 20;
 	int lower_angle = -20;
 
+	float arm_density = 100;
+
 	if (direction == RIGHT) {
 		reference_angle += 180;
-		arm = App->physics->CreateRectangle(x-arm_width, y, arm_width, arm_height, BOUNCER,BALL);
-		//int temp_angle = upper_angle; //To swap angles
-		//upper_angle = lower_angle;
-		//lower_angle = temp_angle;
-
+		arm = App->physics->CreateRectangle(x - arm_width, y, arm_width, arm_height, BOUNCER, BALL, 0.0F, b2_dynamicBody, 420.0F, arm_density);
 	}
 	else if (direction == LEFT) {
-		arm = App->physics->CreateRectangle(x, y, arm_width, arm_height, BOUNCER,BALL);
+		arm = App->physics->CreateRectangle(x, y, arm_width, arm_height, BOUNCER,BALL, 0.0F, b2_dynamicBody, 420.0F, arm_density);
 	}
 
 	////Editing the def
@@ -261,7 +259,13 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, DIRECTION direction)
 
 	//Motor
 	def.enableMotor = true;
-	def.maxMotorTorque = 100;
+	def.maxMotorTorque = 100000;
+	float motorSpeed = 20;
+
+	if (direction == RIGHT)
+		def.motorSpeed = -motorSpeed;
+	else
+		def.motorSpeed = motorSpeed;
 
 	return (b2RevoluteJoint*)world->CreateJoint(&def);
 }

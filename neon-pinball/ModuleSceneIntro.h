@@ -68,8 +68,6 @@ public:
 	b2RevoluteJoint*  leftFlipper;
 	b2RevoluteJoint*  rightFlipper;
 
-	float flipperSpeed = 30.00f;
-
 	//Bouncers
 	PhysBody* bouncer_1;
 	PhysBody* bouncer_2;

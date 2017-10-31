@@ -85,20 +85,20 @@ update_status ModuleSceneIntro::Update()
 			SpawnBall(LEFT);
 			game_state = PLAYING;
 		}
-		leftFlipper->SetMotorSpeed(flipperSpeed);
+		leftFlipper->EnableMotor(true);
 	}
 	else
-		leftFlipper->SetMotorSpeed(-flipperSpeed);
+		leftFlipper->EnableMotor(false);
 
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
 		if (game_state == WAITING) {
 			SpawnBall(RIGHT);
 			game_state = PLAYING;
 		}
-		rightFlipper->SetMotorSpeed(-flipperSpeed);
+		rightFlipper->EnableMotor(true);
 	}
 	else
-		rightFlipper->SetMotorSpeed(flipperSpeed);
+		rightFlipper->EnableMotor(false);
 
 
 
