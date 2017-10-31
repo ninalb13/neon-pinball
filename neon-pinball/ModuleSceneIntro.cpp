@@ -6,6 +6,9 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModulePlayer.h"
+#include "ModuleWindow.h"
+#include "string.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -71,6 +74,9 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	//set title
+	p2SString title("NEON Pinball - SCORE: %d ", App->player->score);
+	App->window->SetTitle(title.GetString());
 	ControlTunnels();
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -140,6 +146,7 @@ update_status ModuleSceneIntro::Update()
 
 	DrawEverything();
 
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -162,9 +169,20 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	if (bodyB == death_sensor)
 		LOG("HELLO");
+
 	if (bodyB == tunnel_lower_sensor || bodyB == tunnel_upper_sensor) {
 		insideTunnel = !insideTunnel;
 	}
+	if (bodyB == bouncer_1 || bodyB == bouncer_2 || bodyB == bouncer_3 || bodyB == bouncer_4 || bodyB == bouncer_5)
+	{
+		App->player->score += 300;
+	}
+
+	if (bodyB == left_rectangle_bouncer || bodyB == right_rectangle_bouncer)
+	{
+		App->player->score += 100;
+	}
+
 }
 
 void ModuleSceneIntro::Create_Limits()
