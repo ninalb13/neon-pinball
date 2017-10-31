@@ -25,6 +25,10 @@ public:
 
 	void ControlTunnels();
 
+	void CheckForInput();
+
+	void DoRicksCode();
+
 	
 	void SpawnBall(DIRECTION direction);
 

@@ -91,6 +91,7 @@ PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution
 {
 	PhysBody* ball = CreateCircle(x, y, radius, b2_dynamicBody, restitution, BALL, BOUNCER);
 	ball->listener = listener;
+	ball->body->SetBullet(true);
 	return ball;
 }
 
@@ -235,7 +236,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, DIRECTION direction)
 	int upper_angle = 20;
 	int lower_angle = -20;
 
-	float arm_density = 100;
+	float arm_density = 1000;
 
 	if (direction == RIGHT) {
 		reference_angle += 180;
