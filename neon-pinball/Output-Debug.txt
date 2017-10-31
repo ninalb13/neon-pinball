@@ -1,0 +1,126 @@
+﻿'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Debug\2D Physics - class 4.exe'. Symbols loaded.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntdll.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\KernelBase.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\SDL2.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\vcruntime140d.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\SDL2_image.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\SDL2_mixer.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcrt.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\gdi32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcrt.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\msvcrt.dll'
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\user32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\gdi32full.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ucrtbased.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcp140d.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\win32u.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcp_win.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ucrtbase.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmm.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\imm32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\combase.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmmbase.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmmbase.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\winmmbase.dll'
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\rpcrt4.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cfgmgr32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sspicli.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cryptbase.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\bcryptprimitives.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sechost.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ole32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\oleaut32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\shell32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\SHCore.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\windows.storage.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\advapi32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\shlwapi.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel.appcore.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\powrprof.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\profapi.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\version.dll'. Cannot find or open the PDB file.
+
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\main.cpp(20) : Starting game '2D Physics Playground'...
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\main.cpp(32) : -------------- Application Creation --------------
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\main.cpp(39) : -------------- Application Init --------------
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\modulewindow.cpp(19) : Init SDL window & surface
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\modulerender.cpp(22) : Creating Renderer context
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\moduletextures.cpp(20) : Init Image library
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\moduleinput.cpp(23) : Init SDL input event system
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\moduleaudio.cpp(19) : Loading Audio Mixer
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\application.cpp(69) : Application Start --------------
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\modulephysics.cpp(29) : Creating Physics 2D environment
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\modulesceneintro.cpp(28) : Loading Intro assets
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\moduleplayer.cpp(15) : Loading player
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\main.cpp(48) : -------------- Application Update --------------'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\uxtheme.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msctf.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\dwmapi.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\lskhook.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\clbcatq.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\TextInputFramework.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\CoreUIComponents.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\CoreMessaging.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntmarta.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\WinTypes.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\WinTypes.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\WinTypes.dll'
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\d3d9.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\nvd3dum.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\psapi.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ResourcePolicyClient.dll'. Cannot find or open the PDB file.
+The thread 0x31b0 has exited with code 0 (0x0).
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\ResourcePolicyClient.dll'
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libpng16-16.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\zlib1.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\XAudio2_7.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libvorbisfile-3.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libvorbisfile-3.dll'
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libvorbisfile-3.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libvorbis-0.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libogg-0.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\MMDevAPI.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\propsys.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\devobj.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\AudioSes.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\avrt.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\Windows.UI.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libmodplug-1.dll'. Module was built without symbols.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\wdmaud.drv'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ksuser.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msacm32.drv'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msacm32.dll'. Cannot find or open the PDB file.
+'2D Physics - class 4.exe' (Win32): Loaded 'C:\Windows\SysWOW64\midimap.dll'. Cannot find or open the PDB file.
+The thread 0x16bc has exited with code 0 (0x0).
+
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\main.cpp(70) : -------------- Application CleanUp --------------
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\moduleplayer.cpp(23) : Unloading player
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\modulesceneintro.cpp(69) : Unloading Intro scene
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\moduleaudio.cpp(53) : Freeing sound FX, closing Mixer and Audio subsystemThe thread 0x1db0 has exited with code 0 (0x0).
+The thread 0x2c80 has exited with code 0 (0x0).
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libmodplug-1.dll'
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libvorbis-0.dll'
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libogg-0.dll'
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libvorbisfile-3.dll'
+
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\moduleinput.cpp(92) : Quitting SDL input event subsystem
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\moduletextures.cpp(39) : Freeing textures and Image library'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\zlib1.dll'
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Users\ninalb\Documents\GitHub\neon-pinball\neon-pinball\Game\libpng16-16.dll'
+
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\modulerender.cpp(81) : Destroying rendererThe thread 0x1f70 has exited with code 0 (0x0).
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\psapi.dll'
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\nvd3dum.dll'
+'2D Physics - class 4.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\d3d9.dll'
+
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\modulephysics.cpp(413) : Destroying physics world
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\modulewindow.cpp(74) : Destroying SDL window and quitting all SDL systems
+c:\users\ninalb\documents\github\neon-pinball\neon-pinball\main.cpp(86) : Exiting game '2D Physics Playground'...
+The thread 0x1860 has exited with code 0 (0x0).
+The thread 0x3724 has exited with code 0 (0x0).
+The thread 0x2b1c has exited with code 0 (0x0).
+The thread 0x269c has exited with code 0 (0x0).
+The thread 0x1a4 has exited with code 0 (0x0).
+The thread 0x32f8 has exited with code 0 (0x0).
+The thread 0x2d3c has exited with code 0 (0x0).
+The thread 0x26e0 has exited with code 0 (0x0).
+The program '[6364] 2D Physics - class 4.exe' has exited with code 0 (0x0).
