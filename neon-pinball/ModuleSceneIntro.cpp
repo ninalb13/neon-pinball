@@ -223,13 +223,13 @@ void ModuleSceneIntro::ControlTunnels()
 
 void ModuleSceneIntro::CheckForInput()
 {
-	//if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	//{
-	//	ray_on = !ray_on;
-	//	ray.x = App->input->GetMouseX();
-	//	ray.y = App->input->GetMouseY();
-	//}
-
+	//Reset
+	if (game_state == FINISHED) {
+		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+			App->player->Reset();
+			game_state = WAITING;
+		}
+	}
 
 	//Flippers
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {

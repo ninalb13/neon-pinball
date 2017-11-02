@@ -253,7 +253,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, DIRECTION direction)
 {
 	b2RevoluteJointDef def;
 
-	int arm_width = 45;
+	int arm_width = 40;
 	int arm_height = 7;
 	
 	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/100, b2_staticBody, 0.0f,BALL,BALL); //Super small pivot
