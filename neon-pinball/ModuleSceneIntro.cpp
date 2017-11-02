@@ -259,6 +259,11 @@ void ModuleSceneIntro::DoRicksCode()
 	}
 }
 
+void ModuleSceneIntro::EmitTrail(PhysBody * body)
+{
+
+}
+
 
 void ModuleSceneIntro::SpawnBall(DIRECTION direction)
 {

@@ -19,6 +19,7 @@ enum COLLISION_TYPE{
 	DEATH_SENSOR = 0x0002,
 	TUNNEL_SENSOR = 0x0003,
 	BOUNCER = 0x0004};
+
 class PhysBody
 {
 public:

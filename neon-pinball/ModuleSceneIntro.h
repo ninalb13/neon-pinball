@@ -5,8 +5,14 @@
 #include "Globals.h"
 #include "ModulePhysics.h"
 enum Game_states { PLAYING, WAITING, WAITING_KEY_UP, FINISHED };
-class PhysBody;
 
+struct Particle {
+	iPoint position;
+	int max_life;
+	int current_life;
+};
+
+class PhysBody;
 class ModuleSceneIntro : public Module
 {
 public:
@@ -22,15 +28,12 @@ public:
 	void Create_Limits();
 
 	void SwitchColliders();
-
 	void Create_Bouncers();
-
 	void ControlTunnels();
-
 	void CheckForInput();
-
 	void DoRicksCode();
 
+	void EmitTrail(PhysBody* body);
 	
 	void SpawnBall(DIRECTION direction);
 
@@ -39,6 +42,8 @@ public:
 	bool delete_ball;
 	PhysBody* death_sensor;
 	PhysBody* sensor_test;
+
+	p2List<Particle*> particles;
 
 	Game_states game_state = WAITING;
 
