@@ -44,12 +44,10 @@ bool ModuleSceneIntro::Start()
 	right_rectangle_bouncer = App->physics->CreateRectangleBouncer(343, 743, 180, 1, -rect_bouncer_angle);
 
 	//death sensor
-	death_sensor = App->physics->CreateRectangleSensor(260, 940, 285, 15, BOUNCER, BALL);
+	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15, BOUNCER, BALL);
 
-	leftFlipper = App->physics->CreateFlipper(190, 855, LEFT); //HARDCODING
-	rightFlipper = App->physics->CreateFlipper(300, 855, RIGHT);
-	leftFlipper2 = App->physics->CreateFlipper(140, 480, LEFT);
-
+	leftFlipper = App->physics->CreateFlipper(200, 858, LEFT); //HARDCODING
+	rightFlipper = App->physics->CreateFlipper(300, 858, RIGHT);
 
 	//sensors for the tunnels
 	int tunnel_sensot_radius = 3;
@@ -155,10 +153,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		sensor_iterator = sensor_iterator->next;
 	}
 
-	if (bodyB == tl1 || bodyB == tl2) {
+	if (bodyB == tunnel_lower_sensor || bodyB == tunnel_upper_sensor) {
 		insideTunnel = !insideTunnel;
 	}
-
 	if (bodyB == bouncer_1 || bodyB == bouncer_2 || bodyB == bouncer_3 || bodyB == bouncer_4 || bodyB == bouncer_5)
 	{
 		App->player->score += 300;
@@ -258,11 +255,9 @@ void ModuleSceneIntro::CheckForInput()
 			game_state = PLAYING;
 		}
 		leftFlipper->EnableMotor(true);
-		leftFlipper2->EnableMotor(true);
 	}
 	else {
 		leftFlipper->EnableMotor(false);
-		leftFlipper2->EnableMotor(false);
 	}
 
 
@@ -334,14 +329,6 @@ void ModuleSceneIntro::DoRicksCode()
 	}
 }
 
-void ModuleSceneIntro::AddTunnels()
-{
-	tunnels_list.add(left_tunnel_up);
-	tunnels_list.add(left_tunnel_down);
-	tunnels_list.add(right_move_1);
-	tunnels_list.add(right_move_2);
-}
-
 void ModuleSceneIntro::EmitTrail(PhysBody * body)
 {
 
@@ -350,21 +337,20 @@ void ModuleSceneIntro::EmitTrail(PhysBody * body)
 
 void ModuleSceneIntro::SpawnBall(DIRECTION direction)
 {
-	int ball_radius = 7;
 	int spawn_x = 250;
 	int spawn_y = 580;
 	bool wake = true;
-	ball = App->physics->CreateBall(spawn_x, spawn_y, ball_radius, 0.0f, this);
+	ball = App->physics->CreateBall(spawn_x, spawn_y, 10, 0.0f, this);
 	if (direction == RIGHT)
 	{
-		b2Vec2 impulse_right(1.0f, 0.0f);
-		b2Vec2 impulse_right_y(0.0f, 1.5f);
+		b2Vec2 impulse_right(0.55f, 0.0f);
+		b2Vec2 impulse_right_y(0.0f, 0.350f);
 		ball->body->ApplyLinearImpulse(impulse_right, impulse_right_y, wake);
 	}
 	else if (direction == LEFT)
 	{
-		b2Vec2 impulse_left(-1.0f, 0.0f);
-		b2Vec2 impulse_left_y(0.0f, 1.5f);
+		b2Vec2 impulse_left(-0.60f, 0.0f);
+		b2Vec2 impulse_left_y(0.0f, 0.350f);
 		ball->body->ApplyLinearImpulse(impulse_left, impulse_left_y, wake);
 	}
 
@@ -407,7 +393,6 @@ void ModuleSceneIntro::Create_Limits()
 	};
 
 	left_tunnel_2 = App->physics->CreateChain(0, 0, lefttunnel2, 56, "static", BOUNCER, BALL);
-
 	// Pivot 0, 0
 	// Pivot 0, 0
 	int lefttunnelup[84] = {
@@ -834,8 +819,6 @@ void ModuleSceneIntro::Create_Limits()
 	};
 
 	right_block_up = App->physics->CreateChain(0, 0, rightblockup, 8, "static", BOUNCER, BALL);
-
-
 }
 
 void ModuleSceneIntro::SwitchColliders()
