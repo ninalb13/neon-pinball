@@ -32,6 +32,8 @@ bool ModuleSceneIntro::Start()
 
 	background = App->textures->Load("pinball/Pinball.png");
 	circle = App->textures->Load("pinball/wheel.png");
+	flipper = App->textures->Load("pinball/flipper.png");
+
 	App->audio->PlayMusic("pinball/pinball_song.ogg");
 
 	Create_Limits();
@@ -47,11 +49,11 @@ bool ModuleSceneIntro::Start()
 	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15, BOUNCER, BALL);
 
 	//FLippers
-	leftFlipper = App->physics->CreateFlipper(200, 858, LEFT); //HARDCODING
-	rightFlipper = App->physics->CreateFlipper(300, 858, RIGHT);
+	leftFlipper = App->physics->CreateFlipper(190, 855, LEFT); //HARDCODING
+	rightFlipper = App->physics->CreateFlipper(300, 855, RIGHT);
 
-	flippers.add(leftFlipper->GetBodyA());
-	flippers.add(rightFlipper->GetBodyA());
+	flippers.add(leftFlipper);
+	flippers.add(rightFlipper);
 
 	//sensors for the tunnels
 	int tunnel_sensot_radius = 3;
@@ -126,12 +128,17 @@ void ModuleSceneIntro::DrawEverything()
 		App->renderer->Blit(circle, x, y, NULL, 1.0f);
 	}
 
-	p2List_item<b2Body*>* flipper_iterator = flippers.getFirst();
+	p2List_item<b2RevoluteJoint*>* flipper_iterator = flippers.getFirst();
 
-	//while (flipper_iterator) {
-	//	
-	//}
+	x = 190;
+	y = 855;
+	float angle = -leftFlipper->GetJointAngle() * RADTODEG;
 
+	App->renderer->Blit(flipper, x, y, NULL, 1.0f,angle,0,0);
+
+
+	x = 300;
+	y = 855;
 
 }
 

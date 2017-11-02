@@ -85,6 +85,7 @@ public:
 
 	SDL_Texture* background;
 	SDL_Texture* circle;
+	SDL_Texture* flipper;
 
 	p2Point<int> ray;
 	bool ray_on;
@@ -93,7 +94,7 @@ public:
 	PhysBody* ball;
 
 	//Flippers
-	p2List<b2Body*> flippers;
+	p2List<b2RevoluteJoint*> flippers;
 	b2RevoluteJoint*  leftFlipper;
 	b2RevoluteJoint*  leftFlipper2;
 	b2RevoluteJoint*  rightFlipper;
