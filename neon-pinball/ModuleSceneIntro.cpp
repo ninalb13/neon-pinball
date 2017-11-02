@@ -32,7 +32,7 @@ bool ModuleSceneIntro::Start()
 
 	background = App->textures->Load("pinball/Pinball.png");
 	circle = App->textures->Load("pinball/wheel.png");
-	App->audio->PlayMusic("Game/pinball/pinball_song.ogg");
+	App->audio->PlayMusic("pinball/pinball_song.ogg");
 
 	Create_Limits();
 	Create_Bouncers();
