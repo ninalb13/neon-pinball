@@ -46,7 +46,7 @@ bool ModuleSceneIntro::Start()
 	right_rectangle_bouncer = App->physics->CreateRectangleBouncer(343, 743, 180, 1, -rect_bouncer_angle);
 
 	//death sensor
-	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15, BOUNCER, BALL);
+	death_sensor = App->physics->CreateRectangleSensor(260, 940, 285, 15, BOUNCER, BALL);
 
 	//FLippers
 	leftFlipper = App->physics->CreateFlipper(190, 855, LEFT); //HARDCODING
@@ -239,8 +239,8 @@ void ModuleSceneIntro::CreateSensors()
 
 }
 
-//void ModuleSceneIntro::ControlTunnels()
-//{
+void ModuleSceneIntro::ControlTunnels()
+{
 //	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
 //	p2List_item<PhysBody*>* walls_iterator = walls_list.getFirst();
 //
@@ -264,7 +264,7 @@ void ModuleSceneIntro::CreateSensors()
 //			walls_iterator = walls_iterator->next;
 //		}
 //	}
-//}
+}
 
 void ModuleSceneIntro::CheckForInput()
 {
