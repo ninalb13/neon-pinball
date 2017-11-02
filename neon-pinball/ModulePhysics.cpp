@@ -175,8 +175,9 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 
 	return pbody;
 }
-PhysBody* ModulePhysics::CreateCircularSensor(int x, int y, int radius, uint16 category, uint16 mask)
+PhysBody* ModulePhysics::CreateCircularSensor(int x, int y)
 {
+	int radius = 13;
 	b2BodyDef body;
 	body.type = b2_staticBody;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
@@ -190,8 +191,8 @@ PhysBody* ModulePhysics::CreateCircularSensor(int x, int y, int radius, uint16 c
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.isSensor = true;
-	fixture.filter.categoryBits = category;
-	fixture.filter.maskBits = mask;
+	fixture.filter.categoryBits = BOUNCER;
+	fixture.filter.maskBits = BALL;
 
 	b->CreateFixture(&fixture);
 

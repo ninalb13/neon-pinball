@@ -29,6 +29,7 @@ public:
 
 	void SwitchColliders();
 	void Create_Bouncers();
+	void CreateSensors();
 	void ControlTunnels();
 	void CheckForInput();
 	void DoRicksCode();
@@ -41,7 +42,15 @@ public:
 
 	bool delete_ball;
 	PhysBody* death_sensor;
-	PhysBody* sensor_test;
+
+	//Sensors
+	p2List<PhysBody*> sensors_list;
+	PhysBody* s1;
+	PhysBody* s2;
+	PhysBody* s3;
+	PhysBody* s4;
+	PhysBody* s5;
+	PhysBody* s6;
 
 	p2List<Particle*> particles;
 

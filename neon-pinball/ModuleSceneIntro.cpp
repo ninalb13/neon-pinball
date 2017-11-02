@@ -36,6 +36,7 @@ bool ModuleSceneIntro::Start()
 
 	Create_Limits();
 	Create_Bouncers();
+	CreateSensors();
 
 	//Rectangle bouncers
 	float rect_bouncer_angle = 1.07973048f;
@@ -53,15 +54,14 @@ bool ModuleSceneIntro::Start()
 	tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6, BOUNCER, BALL);
 	tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9, BOUNCER, BALL);
 
-	//circular sensor
-	sensor_test = App->physics->CreateCircularSensor(80, 700, 7, BOUNCER, BALL);
-
 	//First desactivate all tunnels
 	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
 	while (tunnels_iterator) {
 		tunnels_iterator->data->body->SetActive(false);
 		tunnels_iterator = tunnels_iterator->next;
 	}
+
+	
 
 	return ret;
 }
@@ -121,18 +121,22 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->player->balls--;
 
-		 if (App->player->balls == 0 || App->player->balls < 0)
+			if (App->player->balls == 0 || App->player->balls < 0)
 			{
-			 App->player->balls = 0;
+				App->player->balls = 0;
 				game_state = FINISHED;
 			}
-			
+
 		}
 	}
 
-	if (bodyB == sensor_test)
-	{
-		App->player->score += 300;
+	p2List_item<PhysBody*>* sensor_iterator = sensors_list.getFirst();
+	while (sensor_iterator) {
+		if (bodyB == sensor_iterator->data)
+		{
+			App->player->score += 300;
+		}
+		sensor_iterator = sensor_iterator->next;
 	}
 
 	if (bodyB == tunnel_lower_sensor || bodyB == tunnel_upper_sensor) {
@@ -180,6 +184,23 @@ void ModuleSceneIntro::Create_Bouncers()
 	bouncers.add(bouncer_8);
 	bouncers.add(bouncer_9);
 	bouncers.add(bouncer_10);
+}
+
+void ModuleSceneIntro::CreateSensors()
+{
+	//Upper left corner
+	s1 = App->physics->CreateCircularSensor(130, 216);
+	s2 = App->physics->CreateCircularSensor(209, 150);
+
+	//inside tunnel
+	s3 = App->physics->CreateCircularSensor(100, 522);
+
+	//right
+	s4 = App->physics->CreateCircularSensor(316, 400);
+	s5 = App->physics->CreateCircularSensor(400, 400);
+	s6 = App->physics->CreateCircularSensor(413, 487);
+
+	sensors_list.add(s1);
 }
 
 void ModuleSceneIntro::ControlTunnels()
