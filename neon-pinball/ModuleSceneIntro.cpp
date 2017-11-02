@@ -46,8 +46,12 @@ bool ModuleSceneIntro::Start()
 	//death sensor
 	death_sensor = App->physics->CreateRectangleSensor(260, 910, 285, 15, BOUNCER, BALL);
 
+	//FLippers
 	leftFlipper = App->physics->CreateFlipper(200, 858, LEFT); //HARDCODING
 	rightFlipper = App->physics->CreateFlipper(300, 858, RIGHT);
+
+	flippers.add(leftFlipper->GetBodyA());
+	flippers.add(rightFlipper->GetBodyA());
 
 	//sensors for the tunnels
 	int tunnel_sensot_radius = 3;
@@ -75,7 +79,7 @@ bool ModuleSceneIntro::Start()
 		tunnels_iterator = tunnels_iterator->next;
 	}
 
-	
+	AddTunnels();
 
 	return ret;
 }
@@ -93,7 +97,7 @@ update_status ModuleSceneIntro::Update()
 {
 
 	//set title
-	
+
 	p2SString title(" -- SCORE: %d - NEON Pinball - BALLS: %d --", App->player->score, App->player->balls);
 
 	App->window->SetTitle(title.GetString());
@@ -121,6 +125,12 @@ void ModuleSceneIntro::DrawEverything()
 		ball->GetPosition(x, y);
 		App->renderer->Blit(circle, x, y, NULL, 1.0f);
 	}
+
+	p2List_item<b2Body*>* flipper_iterator = flippers.getFirst();
+
+	//while (flipper_iterator) {
+	//	
+	//}
 
 
 }
@@ -153,7 +163,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		sensor_iterator = sensor_iterator->next;
 	}
 
-	if (bodyB == tunnel_lower_sensor || bodyB == tunnel_upper_sensor) {
+
+	if (bodyB == tl1 || bodyB == tl2 || bodyB == te1 || bodyB == te2 || bodyB == tu1 || bodyB == tu2) {
 		insideTunnel = !insideTunnel;
 	}
 	if (bodyB == bouncer_1 || bodyB == bouncer_2 || bodyB == bouncer_3 || bodyB == bouncer_4 || bodyB == bouncer_5)
@@ -165,7 +176,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->player->score += 100;
 	}
-	
+
 
 }
 
@@ -223,17 +234,26 @@ void ModuleSceneIntro::CreateSensors()
 void ModuleSceneIntro::ControlTunnels()
 {
 	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
+	p2List_item<PhysBody*>* walls_iterator = walls_list.getFirst();
 
 	if (insideTunnel) {
 		while (tunnels_iterator) {
 			tunnels_iterator->data->body->SetActive(true);
 			tunnels_iterator = tunnels_iterator->next;
 		}
+		while (walls_iterator) {
+			walls_iterator->data->body->SetActive(false);
+			walls_iterator = walls_iterator->next;
+		}
 	}
 	else {
 		while (tunnels_iterator) {
 			tunnels_iterator->data->body->SetActive(false);
 			tunnels_iterator = tunnels_iterator->next;
+		}
+		while (walls_iterator) {
+			walls_iterator->data->body->SetActive(true);
+			walls_iterator = walls_iterator->next;
 		}
 	}
 }
@@ -329,6 +349,21 @@ void ModuleSceneIntro::DoRicksCode()
 	}
 }
 
+
+void ModuleSceneIntro::AddTunnels()
+{
+	tunnels_list.add(left_tunnel_up);
+	tunnels_list.add(left_tunnel_down);
+	tunnels_list.add(right_move_1);
+	tunnels_list.add(right_move_2);
+
+	walls_list.add(right_move_vertical);
+	walls_list.add(right_move_vertical_1);
+	walls_list.add(right_block_down);
+	walls_list.add(right_block_up);
+
+}
+
 void ModuleSceneIntro::EmitTrail(PhysBody * body)
 {
 
@@ -337,10 +372,11 @@ void ModuleSceneIntro::EmitTrail(PhysBody * body)
 
 void ModuleSceneIntro::SpawnBall(DIRECTION direction)
 {
+	int radius = 6;
 	int spawn_x = 250;
 	int spawn_y = 580;
 	bool wake = true;
-	ball = App->physics->CreateBall(spawn_x, spawn_y, 10, 0.0f, this);
+	ball = App->physics->CreateBall(spawn_x, spawn_y, radius, 0.0f, this);
 	if (direction == RIGHT)
 	{
 		b2Vec2 impulse_right(0.55f, 0.0f);
@@ -440,7 +476,7 @@ void ModuleSceneIntro::Create_Limits()
 		258, 35
 	};
 
-	left_tunnel_up = App->physics->CreateChain(0, 0,lefttunnelup, 84, "static", BOUNCER, BALL);
+	left_tunnel_up = App->physics->CreateChain(0, 0, lefttunnelup, 84, "static", BOUNCER, BALL);
 
 	// Pivot 0, 0
 	int lefttunneldown[82] = {
@@ -563,7 +599,7 @@ void ModuleSceneIntro::Create_Limits()
 
 
 
-	
+
 	// Pivot 0, 0
 	int line2[8] = {
 		306, 216,
