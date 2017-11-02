@@ -33,6 +33,7 @@ bool ModuleSceneIntro::Start()
 	background = App->textures->Load("pinball/Pinball.png");
 	circle = App->textures->Load("pinball/wheel.png");
 
+	/*background_music = App->audio->LoadFx()*/
 
 	Create_Limits();
 	Create_Bouncers();
@@ -672,7 +673,7 @@ void ModuleSceneIntro::Create_Limits()
 
 	// Pivot 0, 0
 	int Pinball[62] = {
-		190, 922,
+		190, 940,
 		189, 884,
 		45, 817,
 		45, 210,
@@ -702,7 +703,7 @@ void ModuleSceneIntro::Create_Limits()
 		439, 518,
 		438, 816,
 		298, 886,
-		296, 921
+		296, 940
 	};
 
 
