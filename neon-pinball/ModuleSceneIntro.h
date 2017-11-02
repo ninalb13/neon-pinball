@@ -93,4 +93,32 @@ public:
 	//triangles
 	PhysBody* left_triangle;
 	PhysBody* right_triangle;
+
+	//right bar
+	PhysBody* right_bar;
+	PhysBody* left_bar;
+
+	PhysBody* line_1;
+	PhysBody* line_2;
+	PhysBody* line_3;
+	PhysBody* line_4;
+	PhysBody* line_5;
+
+
+	PhysBody* left_part;
+	PhysBody* right_part;
+	PhysBody* left_tunnel_up;
+	PhysBody* left_tunnel_down;
+	PhysBody* left_tunnel_2;
+	PhysBody* small_rightpart;
+	PhysBody* right_tunnel;
+	PhysBody* right_tunnel_2;
+	PhysBody* right_small_2;
+
+	PhysBody* right_move_1;
+	PhysBody* right_move_2;
+	PhysBody* right_move_vertical;
+	PhysBody* right_move_vertical_1;
+	PhysBody* right_block_down;
+	PhysBody* right_block_up;
 };
