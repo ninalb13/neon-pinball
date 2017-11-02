@@ -52,6 +52,16 @@ public:
 	PhysBody* s5;
 	PhysBody* s6;
 
+	//tunnel sensors
+	PhysBody* tl1;
+	PhysBody* tl2;
+
+	PhysBody* tu1;
+	PhysBody* tu2;
+
+	PhysBody* te1;
+	PhysBody* te2;
+
 	p2List<Particle*> particles;
 
 	Game_states game_state = WAITING;

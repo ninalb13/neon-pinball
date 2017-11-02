@@ -175,9 +175,8 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 
 	return pbody;
 }
-PhysBody* ModulePhysics::CreateCircularSensor(int x, int y)
+PhysBody* ModulePhysics::CreateCircularSensor(int x, int y, int radius)
 {
-	int radius = 13;
 	b2BodyDef body;
 	body.type = b2_staticBody;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));

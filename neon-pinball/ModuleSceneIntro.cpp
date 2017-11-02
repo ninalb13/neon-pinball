@@ -50,9 +50,23 @@ bool ModuleSceneIntro::Start()
 	rightFlipper = App->physics->CreateFlipper(300, 858, RIGHT);
 
 	//sensors for the tunnels
+	int tunnel_sensot_radius = 3;
 
-	tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6, BOUNCER, BALL);
-	tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9, BOUNCER, BALL);
+	//left
+	tl1 = App->physics->CreateCircularSensor(100, 360, tunnel_sensot_radius);
+	tl2 = App->physics->CreateCircularSensor(289, 44, tunnel_sensot_radius);
+
+	//right interior
+	tu1 = App->physics->CreateCircularSensor(405, 120, tunnel_sensot_radius);
+	tu2 = App->physics->CreateCircularSensor(422, 168, tunnel_sensot_radius);
+
+	//right exterior
+	te1 = App->physics->CreateCircularSensor(399, 150, tunnel_sensot_radius);
+	te2 = App->physics->CreateCircularSensor(440, 145, tunnel_sensot_radius);
+
+
+	//tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6, BOUNCER, BALL);
+	//tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9, BOUNCER, BALL);
 
 	//First desactivate all tunnels
 	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
@@ -188,17 +202,18 @@ void ModuleSceneIntro::Create_Bouncers()
 
 void ModuleSceneIntro::CreateSensors()
 {
+	int radius = 13;
 	//Upper left corner
-	s1 = App->physics->CreateCircularSensor(130, 216);
-	s2 = App->physics->CreateCircularSensor(209, 150);
+	s1 = App->physics->CreateCircularSensor(130, 216, radius);
+	s2 = App->physics->CreateCircularSensor(209, 150, radius);
 
 	//inside tunnel
-	s3 = App->physics->CreateCircularSensor(100, 522);
+	s3 = App->physics->CreateCircularSensor(100, 522, radius);
 
 	//right
-	s4 = App->physics->CreateCircularSensor(316, 400);
-	s5 = App->physics->CreateCircularSensor(400, 400);
-	s6 = App->physics->CreateCircularSensor(413, 487);
+	s4 = App->physics->CreateCircularSensor(316, 400, radius);
+	s5 = App->physics->CreateCircularSensor(400, 400, radius);
+	s6 = App->physics->CreateCircularSensor(413, 487, radius);
 
 	sensors_list.add(s1);
 }
