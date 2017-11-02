@@ -238,32 +238,32 @@ void ModuleSceneIntro::CreateSensors()
 
 }
 
-void ModuleSceneIntro::ControlTunnels()
-{
-	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
-	p2List_item<PhysBody*>* walls_iterator = walls_list.getFirst();
-
-	if (insideTunnel) {
-		while (tunnels_iterator) {
-			tunnels_iterator->data->body->SetActive(true);
-			tunnels_iterator = tunnels_iterator->next;
-		}
-		while (walls_iterator) {
-			walls_iterator->data->body->SetActive(false);
-			walls_iterator = walls_iterator->next;
-		}
-	}
-	else {
-		while (tunnels_iterator) {
-			tunnels_iterator->data->body->SetActive(false);
-			tunnels_iterator = tunnels_iterator->next;
-		}
-		while (walls_iterator) {
-			walls_iterator->data->body->SetActive(true);
-			walls_iterator = walls_iterator->next;
-		}
-	}
-}
+//void ModuleSceneIntro::ControlTunnels()
+//{
+//	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
+//	p2List_item<PhysBody*>* walls_iterator = walls_list.getFirst();
+//
+//	if (insideTunnel) {
+//		while (tunnels_iterator) {
+//			tunnels_iterator->data->body->SetActive(true);
+//			tunnels_iterator = tunnels_iterator->next;
+//		}
+//		while (walls_iterator) {
+//			walls_iterator->data->body->SetActive(false);
+//			walls_iterator = walls_iterator->next;
+//		}
+//	}
+//	else {
+//		while (tunnels_iterator) {
+//			tunnels_iterator->data->body->SetActive(false);
+//			tunnels_iterator = tunnels_iterator->next;
+//		}
+//		while (walls_iterator) {
+//			walls_iterator->data->body->SetActive(true);
+//			walls_iterator = walls_iterator->next;
+//		}
+//	}
+//}
 
 void ModuleSceneIntro::CheckForInput()
 {
@@ -386,14 +386,14 @@ void ModuleSceneIntro::SpawnBall(DIRECTION direction)
 	ball = App->physics->CreateBall(spawn_x, spawn_y, radius, 0.0f, this);
 	if (direction == RIGHT)
 	{
-		b2Vec2 impulse_right(0.55f, 0.0f);
-		b2Vec2 impulse_right_y(0.0f, 0.350f);
+		b2Vec2 impulse_right(0.25f, 0.0f);
+		b2Vec2 impulse_right_y(0.0f, 0.1f);
 		ball->body->ApplyLinearImpulse(impulse_right, impulse_right_y, wake);
 	}
 	else if (direction == LEFT)
 	{
-		b2Vec2 impulse_left(-0.60f, 0.0f);
-		b2Vec2 impulse_left_y(0.0f, 0.350f);
+		b2Vec2 impulse_left(-0.25f, 0.0f);
+		b2Vec2 impulse_left_y(0.0f, 0.1f);
 		ball->body->ApplyLinearImpulse(impulse_left, impulse_left_y, wake);
 	}
 
