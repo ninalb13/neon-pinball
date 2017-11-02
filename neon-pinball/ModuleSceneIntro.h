@@ -34,6 +34,8 @@ public:
 	void CheckForInput();
 	void DoRicksCode();
 
+	void AddTunnels();
+
 	void EmitTrail(PhysBody* body);
 	
 	void SpawnBall(DIRECTION direction);
@@ -77,12 +79,6 @@ public:
 
 	//tunnels
 	p2List<PhysBody*> tunnels_list;
-	PhysBody* longchain;
-	PhysBody* longchain_2;
-	PhysBody* uppercurve;
-	PhysBody* uppercurve_2;
-	PhysBody* lowercurve;
-	PhysBody* lowercurve_2;
 
 	bool insideTunnel;
 
@@ -97,6 +93,7 @@ public:
 
 	//Flippers
 	b2RevoluteJoint*  leftFlipper;
+	b2RevoluteJoint*  leftFlipper2;
 	b2RevoluteJoint*  rightFlipper;
 
 	//Bouncers
@@ -131,7 +128,7 @@ public:
 
 	PhysBody* left_part;
 	PhysBody* right_part;
-	PhysBody* left_tunnel_up;
+	PhysBody* left_tunnel_up;//
 	PhysBody* left_tunnel_down;
 	PhysBody* left_tunnel_2;
 	PhysBody* small_rightpart;
@@ -139,7 +136,7 @@ public:
 	PhysBody* right_tunnel_2;
 	PhysBody* right_small_2;
 
-	PhysBody* right_move_1;
+	PhysBody* right_move_1;//
 	PhysBody* right_move_2;
 	PhysBody* right_move_vertical;
 	PhysBody* right_move_vertical_1;
