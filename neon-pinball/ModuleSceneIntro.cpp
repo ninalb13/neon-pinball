@@ -128,7 +128,7 @@ void ModuleSceneIntro::DrawEverything()
 		App->renderer->Blit(circle, x, y, NULL, 1.0f);
 	}
 
-	p2List_item<b2RevoluteJoint*>* flipper_iterator = flippers.getFirst();
+	//p2List_item<b2RevoluteJoint*>* flipper_iterator = flippers.getFirst();
 
 	x = 190;
 	y = 855;
@@ -136,9 +136,10 @@ void ModuleSceneIntro::DrawEverything()
 
 	App->renderer->Blit(flipper, x, y, NULL, 1.0f,angle,0,0);
 
-
+	angle = -leftFlipper->GetJointAngle() * RADTODEG;
 	x = 300;
 	y = 855;
+	App->renderer->Blit(flipper, x, y, NULL, 1.0f, angle, 0, 0);
 
 }
 
@@ -359,15 +360,6 @@ void ModuleSceneIntro::DoRicksCode()
 
 void ModuleSceneIntro::AddTunnels()
 {
-	tunnels_list.add(left_tunnel_up);
-	tunnels_list.add(left_tunnel_down);
-	tunnels_list.add(right_move_1);
-	tunnels_list.add(right_move_2);
-
-	walls_list.add(right_move_vertical);
-	walls_list.add(right_move_vertical_1);
-	walls_list.add(right_block_down);
-	walls_list.add(right_block_up);
 
 }
 
