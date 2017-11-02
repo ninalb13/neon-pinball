@@ -489,23 +489,6 @@ void ModuleSceneIntro::Create_Limits()
 	left_tunnel_down = App->physics->CreateChain(0, 0, lefttunneldown, 82, "static", BOUNCER, BALL);
 	// Pivot 0, 0
 
-	int rightpart[26] = {
-		438, 400,
-		438, 246,
-		436, 195,
-		428, 159,
-		446, 157,
-		461, 160,
-		479, 166,
-		494, 175,
-		508, 190,
-		517, 207,
-		524, 227,
-		520, 248,
-		464, 379
-	};
-
-	right_part = App->physics->CreateChain(0, 0, rightpart, 26, "static", BOUNCER, BALL);
 
 	//mini lines
 	// Pivot 0, 0
@@ -518,14 +501,8 @@ void ModuleSceneIntro::Create_Limits()
 		291, 216
 	};
 
-	// Pivot 0, 0
-	int righttunnelsmall[8] = {
-		389, 447,
-		393, 451,
-		440, 405,
-		437, 401
-	};
-	small_rightpart = App->physics->CreateChain(0, 0, righttunnelsmall, 8, "static", BOUNCER, BALL);
+	line_1 = App->physics->CreateChain(0, 0, line1, 12, "static", BOUNCER, BALL);
+
 
 	// Pivot 0, 0
 	int righttunnel[48] = {
@@ -558,51 +535,32 @@ void ModuleSceneIntro::Create_Limits()
 	right_tunnel = App->physics->CreateChain(0, 0, righttunnel, 48, "static", BOUNCER, BALL);
 
 	// Pivot 0, 0
-	int righttunnel2[54] = {
-		357, 157,
-		360, 160,
-		373, 148,
-		388, 141,
-		399, 137,
-		398, 128,
-		388, 113,
-		380, 102,
-		363, 86,
-		344, 72,
-		319, 61,
-		294, 54,
-		273, 60,
-		264, 71,
-		269, 72,
-		272, 65,
-		280, 60,
-		292, 60,
-		300, 61,
-		324, 67,
-		346, 78,
-		364, 92,
-		379, 108,
-		388, 120,
-		394, 132,
-		378, 141,
-		364, 150
+	int righttunnel2[40] = {
+		277, 58,
+		279, 53,
+		295, 52,
+		311, 55,
+		347, 70,
+		380, 97,
+		402, 133,
+		417, 178,
+		420, 211,
+		421, 239,
+		417, 240,
+		416, 220,
+		416, 197,
+		408, 159,
+		388, 116,
+		366, 88,
+		329, 64,
+		303, 57,
+		289, 56,
+		282, 57
 	};
 
-	right_tunnel_2 = App->physics->CreateChain(0, 0, righttunnel2, 54, "static", BOUNCER, BALL);
+	right_tunnel_2 = App->physics->CreateChain(0, 0, righttunnel2,40, "static", BOUNCER, BALL);
 
-	// Pivot 0, 0
-	int rightsmall2[16] = {
-		407, 160,
-		398, 167,
-		387, 177,
-		371, 188,
-		367, 185,
-		381, 173,
-		392, 166,
-		406, 159
-	};
 
-	right_small_2 = App->physics->CreateChain(0, 0, rightsmall2, 16, "static", BOUNCER, BALL);
 
 
 	
@@ -671,42 +629,34 @@ void ModuleSceneIntro::Create_Limits()
 	left_bar = App->physics->CreateChain(0, 0, leftbar, 10, "static", BOUNCER, BALL);
 
 	// Pivot 0, 0
-	int Pinball[62] = {
-		190, 940,
-		189, 884,
-		45, 817,
-		45, 210,
-		52, 172,
-		67, 133,
-		90, 97,
-		126, 65,
-		166, 44,
-		220, 29,
-		286, 32,
-		324, 43,
-		362, 62,
-		394, 88,
-		420, 131,
-		431, 132,
-		450, 134,
-		468, 137,
-		487, 144,
-		504, 154,
-		521, 167,
-		537, 185,
-		546, 205,
-		551, 229,
-		545, 258,
-		490, 398,
-		472, 443,
-		439, 518,
-		438, 816,
-		298, 886,
-		296, 940
+	// Pivot 0, 0
+	int Pinball[44] = {
+		185, 950,
+		189, 887,
+		46, 818,
+		46, 210,
+		52, 175,
+		63, 141,
+		81, 108,
+		110, 76,
+		144, 52,
+		187, 36,
+		237, 26,
+		282, 30,
+		331, 43,
+		364, 62,
+		395, 89,
+		416, 116,
+		432, 156,
+		438, 190,
+		440, 208,
+		440, 819,
+		299, 888,
+		303, 944
 	};
 
 
-	background_.add(App->physics->CreateChain(0, 0, Pinball, 62, "static", BOUNCER, BALL));
+	background_.add(App->physics->CreateChain(0, 0, Pinball, 44, "static", BOUNCER, BALL));
 
 	// Pivot 0, 0
 	int leftpart[46] = {
@@ -757,30 +707,6 @@ void ModuleSceneIntro::Create_Limits()
 	right_triangle = App->physics->CreateChain(0, 0, Triangleright, 6, "static", BOUNCER, BALL);
 
 
-	//moving chains
-	// Pivot 0, 0
-	int rightmove1[12] = {
-		395, 136,
-		409, 131,
-		424, 130,
-		426, 133,
-		411, 134,
-		400, 139
-	};
-	right_move_1 = App->physics->CreateChain(0, 0, rightmove1, 12, "static", BOUNCER, BALL);
-
-	// Pivot 0, 0
-	int rightmove2[12] = {
-		407, 160,
-		409, 165,
-		421, 159,
-		435, 159,
-		435, 154,
-		420, 155
-	};
-
-	right_move_2 = App->physics->CreateChain(0, 0, rightmove2, 12, "static", BOUNCER, BALL);
-
 	// Pivot 0, 0
 	int rightmovevertical[8] = {
 		395, 137,
@@ -791,34 +717,9 @@ void ModuleSceneIntro::Create_Limits()
 
 	right_move_vertical = App->physics->CreateChain(0, 0, rightmovevertical, 8, "static", BOUNCER, BALL);
 
-	// Pivot 0, 0
-	int rightmovevertical1[8] = {
-		418, 132,
-		428, 158,
-		436, 157,
-		426, 131
-	};
-	right_move_vertical_1 = App->physics->CreateChain(0, 0, rightmovevertical1, 8, "static", BOUNCER, BALL);
 
-	//tapa
-	// Pivot 0, 0
-	int rightblockdown[8] = {
-		98, 347,
-		114, 369,
-		121, 366,
-		103, 343
-	};
-	right_block_down = App->physics->CreateChain(0, 0, rightblockdown, 8, "static", BOUNCER, BALL);
 
-	// Pivot 0, 0
-	int rightblockup[8] = {
-		276, 31,
-		277, 60,
-		285, 58,
-		284, 32
-	};
 
-	right_block_up = App->physics->CreateChain(0, 0, rightblockup, 8, "static", BOUNCER, BALL);
 }
 
 void ModuleSceneIntro::SwitchColliders()
