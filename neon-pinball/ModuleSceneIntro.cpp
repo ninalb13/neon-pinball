@@ -153,17 +153,33 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 void ModuleSceneIntro::Create_Bouncers()
 {
-	bouncer_1 = App->physics->CreateCircleBouncer(253, 141);
-	bouncer_2 = App->physics->CreateCircleBouncer(326, 176);
-	bouncer_3 = App->physics->CreateCircleBouncer(155, 447);
-	bouncer_4 = App->physics->CreateCircleBouncer(225, 490);
-	bouncer_5 = App->physics->CreateCircleBouncer(303, 500);
+	//Upper left corner
+	bouncer_1 = App->physics->CreateCircleBouncer(74, 217);
+	bouncer_2 = App->physics->CreateCircleBouncer(100, 157);
+	bouncer_3 = App->physics->CreateCircleBouncer(148, 110);
+	bouncer_4 = App->physics->CreateCircleBouncer(205, 85);
+
+	//Inside tunnel
+	bouncer_5 = App->physics->CreateCircleBouncer(100, 567);
+	bouncer_6 = App->physics->CreateCircleBouncer(143, 537);
+	bouncer_7 = App->physics->CreateCircleBouncer(143, 587);
+
+
+	//In the middle
+	bouncer_8 = App->physics->CreateCircleBouncer(253, 368);
+	bouncer_9 = App->physics->CreateCircleBouncer(269, 527);
+	bouncer_10 = App->physics->CreateCircleBouncer(309, 457);
 
 	bouncers.add(bouncer_1);
 	bouncers.add(bouncer_2);
 	bouncers.add(bouncer_3);
 	bouncers.add(bouncer_4);
 	bouncers.add(bouncer_5);
+	bouncers.add(bouncer_6);
+	bouncers.add(bouncer_7);
+	bouncers.add(bouncer_8);
+	bouncers.add(bouncer_9);
+	bouncers.add(bouncer_10);
 }
 
 void ModuleSceneIntro::ControlTunnels()

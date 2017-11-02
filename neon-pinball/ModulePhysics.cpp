@@ -100,7 +100,7 @@ PhysBody* ModulePhysics::CreateCircleBouncer(int x, int y)
 	float restitution = 0.5f;
 	uint16 category = BOUNCER;
 	uint16 mask = BALL;
-	int radius = 23;
+	int radius = 10;
 	PhysBody* bouncer = CreateCircle(x, y, radius, b2_staticBody, restitution, BOUNCER, BALL);
 	return bouncer;
 }

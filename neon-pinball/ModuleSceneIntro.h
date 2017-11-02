@@ -87,6 +87,11 @@ public:
 	PhysBody* bouncer_3;
 	PhysBody* bouncer_4;
 	PhysBody* bouncer_5;
+	PhysBody* bouncer_6;
+	PhysBody* bouncer_7;
+	PhysBody* bouncer_8;
+	PhysBody* bouncer_9;
+	PhysBody* bouncer_10;
 
 //float flipperSpeed = 10.00f;
 	
