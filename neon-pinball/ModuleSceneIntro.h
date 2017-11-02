@@ -145,4 +145,6 @@ public:
 	PhysBody* right_move_vertical_1;
 	PhysBody* right_block_down;
 	PhysBody* right_block_up;
+
+	
 };
