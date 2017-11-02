@@ -97,7 +97,7 @@ PhysBody * ModulePhysics::CreateBall(int x, int y, int radius, float restitution
 
 PhysBody* ModulePhysics::CreateCircleBouncer(int x, int y)
 {
-	float restitution = 0.5f;
+	float restitution = 0.8f;
 	uint16 category = BOUNCER;
 	uint16 mask = BALL;
 	int radius = 10;
@@ -287,7 +287,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, DIRECTION direction)
 	//Motor
 	def.enableMotor = true;
 	def.maxMotorTorque = 100000;
-	float motorSpeed = 20;
+	float motorSpeed = 30;
 
 	if (direction == RIGHT)
 		def.motorSpeed = -motorSpeed;

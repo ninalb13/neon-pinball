@@ -24,7 +24,9 @@ ModuleSceneIntro::~ModuleSceneIntro()
 
 // Load assets
 bool ModuleSceneIntro::Start()
+
 {
+
 	LOG("Loading Intro assets");
 	bool ret = true;
 
@@ -49,7 +51,7 @@ bool ModuleSceneIntro::Start()
 	death_sensor = App->physics->CreateRectangleSensor(260, 940, 285, 15, BOUNCER, BALL);
 
 	//FLippers
-	leftFlipper = App->physics->CreateFlipper(190, 855, LEFT); //HARDCODING
+	leftFlipper = App->physics->CreateFlipper(187, 855, LEFT); //HARDCODING
 	rightFlipper = App->physics->CreateFlipper(300, 855, RIGHT);
 
 	flippers.add(leftFlipper);
@@ -81,7 +83,7 @@ bool ModuleSceneIntro::Start()
 		tunnels_iterator = tunnels_iterator->next;
 	}
 
-	AddTunnels();
+
 
 	return ret;
 }
@@ -172,7 +174,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 
 
-	if (bodyB == tl1 || bodyB == tl2 || bodyB == te1 || bodyB == te2 || bodyB == tu1 || bodyB == tu2) {
+	if (bodyB == tl1 || bodyB == tl2) {
 		insideTunnel = !insideTunnel;
 	}
 	if (bodyB == bouncer_1 || bodyB == bouncer_2 || bodyB == bouncer_3 || bodyB == bouncer_4 || bodyB == bouncer_5)
@@ -241,29 +243,21 @@ void ModuleSceneIntro::CreateSensors()
 
 void ModuleSceneIntro::ControlTunnels()
 {
-//	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
-//	p2List_item<PhysBody*>* walls_iterator = walls_list.getFirst();
-//
-//	if (insideTunnel) {
-//		while (tunnels_iterator) {
-//			tunnels_iterator->data->body->SetActive(true);
-//			tunnels_iterator = tunnels_iterator->next;
-//		}
-//		while (walls_iterator) {
-//			walls_iterator->data->body->SetActive(false);
-//			walls_iterator = walls_iterator->next;
-//		}
-//	}
-//	else {
-//		while (tunnels_iterator) {
-//			tunnels_iterator->data->body->SetActive(false);
-//			tunnels_iterator = tunnels_iterator->next;
-//		}
-//		while (walls_iterator) {
-//			walls_iterator->data->body->SetActive(true);
-//			walls_iterator = walls_iterator->next;
-//		}
-//	}
+	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
+	p2List_item<PhysBody*>* walls_iterator = walls_list.getFirst();
+
+	if (insideTunnel) {
+		while (tunnels_iterator) {
+			tunnels_iterator->data->body->SetActive(true);
+			tunnels_iterator = tunnels_iterator->next;
+		}
+	}
+	else {
+		while (tunnels_iterator) {
+			tunnels_iterator->data->body->SetActive(false);
+			tunnels_iterator = tunnels_iterator->next;
+		}
+	}
 }
 
 void ModuleSceneIntro::CheckForInput()
@@ -752,6 +746,8 @@ void ModuleSceneIntro::Create_Limits()
 
 	right_move_vertical = App->physics->CreateChain(0, 0, rightmovevertical, 8, "static", BOUNCER, BALL);
 
+	tunnels_list.add(left_tunnel_up);
+	tunnels_list.add(left_tunnel_down);
 
 
 
