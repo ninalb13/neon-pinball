@@ -38,6 +38,7 @@ public:
 
 	bool delete_ball;
 	PhysBody* death_sensor;
+	PhysBody* sensor_test;
 
 	Game_states game_state = WAITING;
 
