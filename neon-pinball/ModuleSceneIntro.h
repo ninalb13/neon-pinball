@@ -79,6 +79,7 @@ public:
 
 	//tunnels
 	p2List<PhysBody*> tunnels_list;
+	p2List<PhysBody*> walls_list;
 
 	bool insideTunnel;
 
@@ -92,6 +93,7 @@ public:
 	PhysBody* ball;
 
 	//Flippers
+	p2List<b2Body*> flippers;
 	b2RevoluteJoint*  leftFlipper;
 	b2RevoluteJoint*  leftFlipper2;
 	b2RevoluteJoint*  rightFlipper;
