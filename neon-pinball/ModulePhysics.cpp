@@ -100,7 +100,7 @@ PhysBody* ModulePhysics::CreateCircleBouncer(int x, int y)
 	float restitution = 0.5f;
 	uint16 category = BOUNCER;
 	uint16 mask = BALL;
-	int radius = 23;
+	int radius = 10;
 	PhysBody* bouncer = CreateCircle(x, y, radius, b2_staticBody, restitution, BOUNCER, BALL);
 	return bouncer;
 }
@@ -175,7 +175,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 
 	return pbody;
 }
-PhysBody* ModulePhysics::CreateCircularSensor(int x, int y, int radius, uint16 category, uint16 mask)
+PhysBody* ModulePhysics::CreateCircularSensor(int x, int y, int radius)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -190,8 +190,8 @@ PhysBody* ModulePhysics::CreateCircularSensor(int x, int y, int radius, uint16 c
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.isSensor = true;
-	fixture.filter.categoryBits = category;
-	fixture.filter.maskBits = mask;
+	fixture.filter.categoryBits = BOUNCER;
+	fixture.filter.maskBits = BALL;
 
 	b->CreateFixture(&fixture);
 
@@ -252,7 +252,7 @@ b2RevoluteJoint* ModulePhysics::CreateFlipper(int x, int y, DIRECTION direction)
 {
 	b2RevoluteJointDef def;
 
-	int arm_width = 45;
+	int arm_width = 40;
 	int arm_height = 7;
 	
 	PhysBody* pivot = App->physics->CreateCircle(x, y, arm_height/100, b2_staticBody, 0.0f,BALL,BALL); //Super small pivot

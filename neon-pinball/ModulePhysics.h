@@ -55,7 +55,7 @@ public:
 	PhysBody* CreateRectangleBouncer(int x, int y, int width, int height, float angle);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, uint16 category, uint16 mask,float restitution, b2BodyType type, float angle = 420, float density = 1.0f);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, uint16 category, uint16 mask);
-	PhysBody* CreateCircularSensor(int x, int y, int radius, uint16 category, uint16 mask);
+	PhysBody* CreateCircularSensor(int x, int y, int radius);
 	PhysBody* CreateChain(int x, int y, int* points, int size, const char* type, uint16 category, uint16 mask);
 	void CreateRevoluteJointDef(b2RevoluteJointDef * def, PhysBody* A, PhysBody* B);
 	PhysBody* CreatePolygon(int x, int y, int* points, int size, float density, uint16 category, uint16 mask);  //Cal revisar-lo

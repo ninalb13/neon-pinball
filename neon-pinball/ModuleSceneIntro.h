@@ -29,6 +29,7 @@ public:
 
 	void SwitchColliders();
 	void Create_Bouncers();
+	void CreateSensors();
 	void ControlTunnels();
 	void CheckForInput();
 	void DoRicksCode();
@@ -41,7 +42,25 @@ public:
 
 	bool delete_ball;
 	PhysBody* death_sensor;
-	PhysBody* sensor_test;
+
+	//Sensors
+	p2List<PhysBody*> sensors_list;
+	PhysBody* s1;
+	PhysBody* s2;
+	PhysBody* s3;
+	PhysBody* s4;
+	PhysBody* s5;
+	PhysBody* s6;
+
+	//tunnel sensors
+	PhysBody* tl1;
+	PhysBody* tl2;
+
+	PhysBody* tu1;
+	PhysBody* tu2;
+
+	PhysBody* te1;
+	PhysBody* te2;
 
 	p2List<Particle*> particles;
 
@@ -87,6 +106,11 @@ public:
 	PhysBody* bouncer_3;
 	PhysBody* bouncer_4;
 	PhysBody* bouncer_5;
+	PhysBody* bouncer_6;
+	PhysBody* bouncer_7;
+	PhysBody* bouncer_8;
+	PhysBody* bouncer_9;
+	PhysBody* bouncer_10;
 
 //float flipperSpeed = 10.00f;
 	

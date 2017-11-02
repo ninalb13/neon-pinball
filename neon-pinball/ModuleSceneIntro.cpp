@@ -36,6 +36,7 @@ bool ModuleSceneIntro::Start()
 
 	Create_Limits();
 	Create_Bouncers();
+	CreateSensors();
 
 	//Rectangle bouncers
 	float rect_bouncer_angle = 1.07973048f;
@@ -49,12 +50,23 @@ bool ModuleSceneIntro::Start()
 	rightFlipper = App->physics->CreateFlipper(300, 858, RIGHT);
 
 	//sensors for the tunnels
+	int tunnel_sensot_radius = 3;
 
-	tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6, BOUNCER, BALL);
-	tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9, BOUNCER, BALL);
+	//left
+	tl1 = App->physics->CreateCircularSensor(100, 360, tunnel_sensot_radius);
+	tl2 = App->physics->CreateCircularSensor(289, 44, tunnel_sensot_radius);
 
-	//circular sensor
-	sensor_test = App->physics->CreateCircularSensor(80, 700, 7, BOUNCER, BALL);
+	//right interior
+	tu1 = App->physics->CreateCircularSensor(405, 120, tunnel_sensot_radius);
+	tu2 = App->physics->CreateCircularSensor(422, 168, tunnel_sensot_radius);
+
+	//right exterior
+	te1 = App->physics->CreateCircularSensor(399, 150, tunnel_sensot_radius);
+	te2 = App->physics->CreateCircularSensor(440, 145, tunnel_sensot_radius);
+
+
+	//tunnel_upper_sensor = App->physics->CreateRectangleSensor(100, 210, 33, 6, BOUNCER, BALL);
+	//tunnel_lower_sensor = App->physics->CreateRectangleSensor(355, 345, 28, 9, BOUNCER, BALL);
 
 	//First desactivate all tunnels
 	p2List_item<PhysBody*>* tunnels_iterator = tunnels_list.getFirst();
@@ -62,6 +74,8 @@ bool ModuleSceneIntro::Start()
 		tunnels_iterator->data->body->SetActive(false);
 		tunnels_iterator = tunnels_iterator->next;
 	}
+
+	
 
 	return ret;
 }
@@ -121,18 +135,22 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->player->balls--;
 
-		 if (App->player->balls == 0 || App->player->balls < 0)
+			if (App->player->balls == 0 || App->player->balls < 0)
 			{
-			 App->player->balls = 0;
+				App->player->balls = 0;
 				game_state = FINISHED;
 			}
-			
+
 		}
 	}
 
-	if (bodyB == sensor_test)
-	{
-		App->player->score += 300;
+	p2List_item<PhysBody*>* sensor_iterator = sensors_list.getFirst();
+	while (sensor_iterator) {
+		if (bodyB == sensor_iterator->data)
+		{
+			App->player->score += 300;
+		}
+		sensor_iterator = sensor_iterator->next;
 	}
 
 	if (bodyB == tunnel_lower_sensor || bodyB == tunnel_upper_sensor) {
@@ -153,6 +171,53 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 void ModuleSceneIntro::Create_Bouncers()
 {
+
+	//Upper left corner
+	bouncer_1 = App->physics->CreateCircleBouncer(74, 217);
+	bouncer_2 = App->physics->CreateCircleBouncer(100, 157);
+	bouncer_3 = App->physics->CreateCircleBouncer(148, 110);
+	bouncer_4 = App->physics->CreateCircleBouncer(205, 85);
+
+	//Inside tunnel
+	bouncer_5 = App->physics->CreateCircleBouncer(100, 567);
+	bouncer_6 = App->physics->CreateCircleBouncer(143, 537);
+	bouncer_7 = App->physics->CreateCircleBouncer(143, 587);
+
+
+	//In the middle
+	bouncer_8 = App->physics->CreateCircleBouncer(253, 368);
+	bouncer_9 = App->physics->CreateCircleBouncer(269, 527);
+	bouncer_10 = App->physics->CreateCircleBouncer(309, 457);
+
+	bouncers.add(bouncer_1);
+	bouncers.add(bouncer_2);
+	bouncers.add(bouncer_3);
+	bouncers.add(bouncer_4);
+	bouncers.add(bouncer_5);
+	bouncers.add(bouncer_6);
+	bouncers.add(bouncer_7);
+	bouncers.add(bouncer_8);
+	bouncers.add(bouncer_9);
+	bouncers.add(bouncer_10);
+}
+
+void ModuleSceneIntro::CreateSensors()
+{
+	int radius = 13;
+	//Upper left corner
+	s1 = App->physics->CreateCircularSensor(130, 216, radius);
+	s2 = App->physics->CreateCircularSensor(209, 150, radius);
+
+	//inside tunnel
+	s3 = App->physics->CreateCircularSensor(100, 522, radius);
+
+	//right
+	s4 = App->physics->CreateCircularSensor(316, 400, radius);
+	s5 = App->physics->CreateCircularSensor(400, 400, radius);
+	s6 = App->physics->CreateCircularSensor(413, 487, radius);
+
+	sensors_list.add(s1);
+
 }
 
 void ModuleSceneIntro::ControlTunnels()
@@ -175,13 +240,13 @@ void ModuleSceneIntro::ControlTunnels()
 
 void ModuleSceneIntro::CheckForInput()
 {
-	//if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	//{
-	//	ray_on = !ray_on;
-	//	ray.x = App->input->GetMouseX();
-	//	ray.y = App->input->GetMouseY();
-	//}
-
+	//Reset
+	if (game_state == FINISHED) {
+		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+			App->player->Reset();
+			game_state = WAITING;
+		}
+	}
 
 	//Flippers
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {
