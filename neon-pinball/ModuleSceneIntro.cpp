@@ -136,10 +136,10 @@ void ModuleSceneIntro::DrawEverything()
 
 	App->renderer->Blit(flipper, x, y, NULL, 1.0f,angle,0,0);
 
-	angle = -leftFlipper->GetJointAngle() * RADTODEG;
+	angle = -(rightFlipper->GetJointAngle()-M_PI) * RADTODEG;
 	x = 300;
 	y = 855;
-	App->renderer->Blit(flipper, x, y, NULL, 1.0f, angle, 0, 0);
+	App->renderer->Blit(flipper, x, y, NULL, 1.0f, angle, 0, 6);
 
 }
 
