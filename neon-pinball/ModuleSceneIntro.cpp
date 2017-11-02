@@ -77,8 +77,11 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+
 	//set title
-	p2SString title("NEON Pinball - SCORE: %d ", App->player->score);
+	
+	p2SString title(" -- SCORE: %d - NEON Pinball - BALLS: %d --", App->player->score, App->player->balls);
+
 	App->window->SetTitle(title.GetString());
 	ControlTunnels();
 
@@ -113,6 +116,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyB == death_sensor) {
 		game_state = WAITING_KEY_UP;
 		delete_ball = true;
+
+		if (App->player->balls != 0)
+		{
+			App->player->balls--;
+
+		 if (App->player->balls == 0 || App->player->balls < 0)
+			{
+			 App->player->balls = 0;
+				game_state = FINISHED;
+			}
+			
+		}
 	}
 
 	if (bodyB == sensor_test)
@@ -132,6 +147,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->player->score += 100;
 	}
+	
 
 }
 

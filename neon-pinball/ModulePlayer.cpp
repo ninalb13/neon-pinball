@@ -13,7 +13,6 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-	score = 0;
 	return true;
 }
 
@@ -23,6 +22,12 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player");
 
 	return true;
+}
+
+void ModulePlayer::Reset()
+{
+	balls = 3;
+	score = 0;
 }
 
 // Update: draw background

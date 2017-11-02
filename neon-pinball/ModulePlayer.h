@@ -13,6 +13,9 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	void Reset();
+
 public:
-	int score;
+	int score = 0;
+	int balls = 3;
 };
